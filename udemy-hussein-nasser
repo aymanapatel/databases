@@ -1,0 +1,68 @@
+= Notes on DB engineering 
+:toc: 
+
+
+== ACID
+
+
+== Indexing, Partitioning, Sharding
+
+=== Index Scan vs Index-only Scan
+
+=== Horizantal vs Vertical Partitioning
+
+=== SQL Pagination with Offset is evil
+
+== Concurrency Control
+
+
+== DB replication
+
+
+=== DB System Design
+
+=== Build URL shortener DB Design
+
+
+== DB Engines
+
+
+=== B-Tree DB Engines
+
+==== MyISAM
+
+==== Aria
+
+==== InnoDB
+
+
+==== XtraDB
+
+==== SQLite
+
+
+==== BerkleyDB
+
+
+=== LSM Tree DB Engines
+
+==== LevelDB
+
+==== RocksDB
+
+
+== DB Security
+
+
+== Miscellaneous DB Discussion
+
+
+=== Distributed Transaction
+
+
+=== Server-side vs Client-Side DB
+
+
+
+
+
