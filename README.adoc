@@ -1,0 +1,14 @@
+= Databases
+:toc:
+
+
+
+Courses/Books/Links
+
+- https://www.udemy.com/course/database-engines-crash-course/[Hussein Nasser's course]
+
+- Designing Data Intensive Applications by Martin Klepmann
+
+- Vlad's SQL + JPA Blog (Author of High Performance Java Persistance)
+
+- https://use-the-index-luke.com/[Guide to DB indexing for Developers]
