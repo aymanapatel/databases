@@ -12,3 +12,5 @@
 - Vlad's SQL + JPA Blog (Author of High Performance Java Persistance)
 
 - https://use-the-index-luke.com/[Guide to DB indexing for Developers]
+
+- https://modern-sql.com/[Modern SQL]
