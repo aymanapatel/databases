@@ -5,12 +5,36 @@
 
 == Courses/Books/Links
 
-- https://www.udemy.com/course/database-engines-crash-course/[Hussein Nasser's course]
 
-- Designing Data Intensive Applications by Martin Klepmann
+|===
+- [Course] https://www.udemy.com/course/database-engines-crash-course/[Hussein Nasser's Udemy Course]
 
-- Vlad's SQL + JPA Blog (Author of High Performance Java Persistance)
+- [Book] Designing Data Intensive Applications by Martin Klepmann
 
-- https://use-the-index-luke.com/[Guide to DB indexing for Developers]
+- [Blog] Vlad's SQL + JPA Blog (Author of High Performance Java Persistance)
 
-- https://modern-sql.com/[Modern SQL]
+- [Blog] https://use-the-index-luke.com/[Guide to DB indexing for Developers]
+
+- [Blog]  https://modern-sql.com/[Modern SQL]
+
+
+|===
+
+
+
+.Windtrainer workouts
+[width="80%",cols="3,^2,^2,10",options="header"]
+|=========================================================
+|Type |Duration |Avg HR |Notes
+
+|22-Aug-08 |10:24 | 157 |
+Test
+
+|22-Aug-08 |23:03 | 152 |
+Te
+
+|24-Aug-08 |40:00 | 145 |
+Moderately hard interspersed with 3x 3min intervals (2min
+hard + 1min really hard taking the HR up to 160).
+
+|=========================================================
