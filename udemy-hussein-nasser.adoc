@@ -5,6 +5,25 @@
 == ACID
 
 
+=== Transaction
+
+
+- Collection of queries
+- A Unit of Work
+- Account  Deposit (SELECT, UPDATE, UPDATE)
+    1. `SELECT balance FROM Account WHERE ID=1`
+    2. Check if Balance deposited is available
+    3. `UPDATE Account SET balance = balance - 100 WHERE ID=1`
+    4. `UPDATE Account SET balance = balance + 100 WHERE ID=2`
+    5. COMMIT
+
+
+=== Atomicity
+
+> All queries must succeed. If fail, then rollback everything. `
+     
+  
+
 == Indexing, Partitioning, Sharding
 
 === Index Scan vs Index-only Scan
