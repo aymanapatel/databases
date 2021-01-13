@@ -4,7 +4,9 @@
 
 == ACID
 
+== Durability
 
+> Committed transactionsmust be persisted permanentlyin a non-volatile storage
 === Transaction
 
 
