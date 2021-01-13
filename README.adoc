@@ -6,7 +6,7 @@
 == Courses/Books/Links
 
 
-|===
+
 - [Course] https://www.udemy.com/course/database-engines-crash-course/[Hussein Nasser's Udemy Course]
 
 - [Book] Designing Data Intensive Applications by Martin Klepmann
@@ -18,7 +18,7 @@
 - [Blog]  https://modern-sql.com/[Modern SQL]
 
 
-|===
+
 
 
 
