@@ -4,9 +4,8 @@
 
 == ACID
 
-== Durability
 
-> Committed transactionsmust be persisted permanentlyin a non-volatile storage
+
 
 === Transaction
 
@@ -24,8 +23,66 @@
 === Atomicity
 
 > All queries must succeed. If fail, then rollback everything. `
-     
-  
+
+
+=== Isolation
+
+> Every transaction is isolated. (Can my inflight transactions see changes made by other transaction)
+
+
+==== READ phenomena
+
+> READ ugliness due to lack of ISOLAION.
+
+|===
+|Type | Description | Example
+
+| DIRTY READS | Some other transaction made a change which was not committed; hence my transaction saw uncommitted change. | image:img/DR.jpg[NRR]
+
+| NON-REPEATABLE READS | Read COMMITTED data from an `UPDATE` query from another transaction | image:img/NRR.jpg[NRR]
+
+| PHANTOM READS | Read COMMITTED data from an `INSERT` or `DELETE` query from another transaction | image:img/PR.jpg[NRR]
+
+|  MISCELLANEOUS - (Lost updates)  | When the value you updated is changed (but not committed) by some other transsaction. Hence, your update is lost. | 
+
+|===
+
+1. 
+
+ 
+
+
+
+2. 
+
+
+
+
+
+3. 
+
+
+
+
+4.
+
+
+
+Ayman: Do example for all 4
+
+==== ISOLATION levels
+
+
+
+=== Consistency
+
+
+
+=== Durability     
+
+> Committed transactionsmust be persisted permanentlyin a non-volatile storage
+
+
 
 == Indexing, Partitioning, Sharding
 
