@@ -71,7 +71,7 @@ Ayman: Do example for all 4
 
 |===
 
-image:img/ILvsRP.JPG
+image:img/ILvsRP.JPG[isolationlevelvsreadphenomena]
 
 === Consistency
 
