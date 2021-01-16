@@ -47,32 +47,31 @@
 
 |===
 
-1. 
 
- 
-
-
-
-2. 
-
-
-
-
-
-3. 
-
-
-
-
-4.
 
 
 
 Ayman: Do example for all 4
 
-==== ISOLATION levels
 
 
+==== ISOLATION levels for Inflight transaction
+
+
+|===
+| Isolation Levels | Description | Links
+
+| READ UNCOMMITTED (Least isolated, fastest) | No isolation, any change from outside is visible to the transaction. (All read ugliness is allowed) | 
+
+| READ COMMITTED | Each query in transaction sees only committed stuff| 
+
+| REPEATABLE READ| Each query in transaction only sees committed updates at beginning of transaction | Some DB use versioning for RR. (Example, Cassandra.) Other DB use Lock. Other DB use SHARED LOCK.
+
+| SERIALIZABLE (Most isolated, slowest)| Transactions are serilaized|
+
+|===
+
+image:img/ILvsRP.JPG
 
 === Consistency
 
