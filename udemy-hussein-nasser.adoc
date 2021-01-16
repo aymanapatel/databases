@@ -63,7 +63,7 @@ Ayman: Do example for all 4
 
 | READ UNCOMMITTED (Least isolated, fastest) | No isolation, any change from outside is visible to the transaction. (All read ugliness is allowed) | 
 
-| READ COMMITTED | Each query in transaction sees only committed stuff| 
+| READ COMMITTED | Each query in transaction sees only committed stuff| READ COMMITTED vs REPEATABLE READ image:https://www.cybertec-postgresql.com/wp-content/uploads/2018/11/Transaction-isolation-01-768x548.jpg[Image]
 
 | REPEATABLE READ| Each query in transaction only sees committed updates at beginning of transaction | Some DB use versioning for RR. (Example, Cassandra.) Other DB use Lock. Other DB use SHARED LOCK.
 
