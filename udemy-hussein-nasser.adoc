@@ -1,6 +1,6 @@
 = Notes on DB engineering 
 :toc: 
-
+:icons: font
 
 == ACID
 
@@ -75,12 +75,36 @@ image:img/ILvsRP.JPG[isolationlevelvsreadphenomena]
 
 === Consistency
 
+==== Consistency in Data
+
+1. Defined by user with DDL statements
+
+2. Referential integrity (foreign keys)
+
+3. Atomicity and Isolation leads to data consistency.
+
+Choosing between consistency and performance. Example, likes on social media.
+
+
+
+==== Consistency in Reads
+
+
+
+WARNING: Relational and NoSQL do not guarantee **Consistency in READS**. Replicas in RDBMS cannot provide consistency in reads.
+
+
+
 
 
 === Durability     
 
 > Committed transactionsmust be persisted permanentlyin a non-volatile storage
 
+
+=== Eventual consistency
+
+WARNING: Relational and NoSQL do not guarantee **Consistency in READS**
 
 
 == Indexing, Partitioning, Sharding
