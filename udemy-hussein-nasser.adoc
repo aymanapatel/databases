@@ -35,15 +35,15 @@
 > READ ugliness due to lack of ISOLAION.
 
 |===
-|Type | Description | Example
+|Type | Description | Example | Links
 
-| DIRTY READS | Some other transaction made a change which was not committed; hence my transaction saw uncommitted change. | image:img/DR.jpg[NRR]
+| DIRTY READS | Some other transaction made a change which was not committed; hence my transaction saw uncommitted change. | image:img/DR.JPG[NRR] | 
 
-| NON-REPEATABLE READS | Read COMMITTED data from an `UPDATE` query from another transaction | image:img/NRR.jpg[NRR]
+| NON-REPEATABLE READS | Read COMMITTED data from an `UPDATE` query from another transaction | image:img/NRR.JPG[NRR] | 
 
-| PHANTOM READS | Read COMMITTED data from an `INSERT` or `DELETE` query from another transaction | image:img/PR.jpg[NRR]
+| PHANTOM READS | Read COMMITTED data from an `INSERT` or `DELETE` query from another transaction | image:img/PR.JPG[NRR] | 
 
-|  MISCELLANEOUS - (Lost updates)  | When the value you updated is changed (but not committed) by some other transsaction. Hence, your update is lost. | 
+|  MISCELLANEOUS - (Lost updates)  | When the value you updated is changed (but not committed) by some other transsaction. Hence, your update is lost. | | 
 
 |===
 
