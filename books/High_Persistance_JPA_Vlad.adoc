@@ -1,6 +1,16 @@
 = High-Performance Java Persistence - Vlad Mihalcea
 :toc:
 
+
+== Batch Updates
+
+== JDBC Connection Management
+
+== Performance and Scaling
+
+
+== Statement Caching
+
 == `ResultSet` fetching
 
 == Transactions
