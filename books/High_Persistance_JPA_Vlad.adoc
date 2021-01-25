@@ -1,0 +1,68 @@
+= High-Performance Java Persistence - Vlad Mihalcea
+:toc:
+
+== `ResultSet` fetching
+
+== Transactions
+
+=== Atomicity
+
+
+=== Consistency
+
+=== Isolation
+
+
+==== Concurrency Control
+
+===== 2-phase Locking
+
+===== MVCC
+
+==== READ Phenomena
+
+===== Dirty Write
+
+===== Dirty READ
+
+===== Non-repeatable READ
+
+===== Phantom READ
+
+===== Read Skew
+
+===== Write Skew
+
+===== Lost update
+
+==== Isolation Levels
+
+===== Read Uncommitted
+
+===== Read Committed
+
+===== Repeatable READ
+
+===== Serializable
+
+=== Durability
+
+=== READ-ONLY Transaction Routing
+
+=== Transaction Boundaries
+
+==== Distributed Transaction
+
+===== 2 Phase Commit
+
+
+==== Declarative Transactions
+
+
+=== Application-Level Transactions
+
+==== Pessimistic and Optimistic Locking
+
+===== Pessimistic Locking
+
+===== Optimistic Locking
