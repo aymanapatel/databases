@@ -5,5 +5,21 @@ Learning SQL
 
 > https://learning.oreilly.com/library/view/learning-sql-3rd/9781492057604[Link]
 
-== SQL and Big Data
+
+== 1. Preface
+
+== 18. SQL and Big Data [DONE]
+
+=== Apache Drill
+
+> Realtive newcomer in SQL space
+
+==== Features
+
+1. Multiple data formats: JSON, Parquet, Log file and Delimited Data(aka text file)
+2. Connectors: Hadoop, RDBMS, NoSQL, HBase, Kafka as well as specialized data formats such as Blockchain and PCAP(Packaet Capture files).
+3. Requires no up-front schema definitions
+4. Supports SQL:2003 standard
+5. BI tool integrationL Tableau and Apache Superset
+
 
