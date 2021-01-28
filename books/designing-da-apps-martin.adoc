@@ -2,6 +2,17 @@
 :toc:
 :icons: font
 
+ifdef::env-github[]
+++++
+<p align="center">
+  <img width="460" height="300" src="https://images-na.ssl-images-amazon.com/images/I/91pzJip+jnL.jpg">
+</p>
+++++
+endif::[]
+
+ifndef::env-github[]
+image::https://images-na.ssl-images-amazon.com/images/I/91pzJip+jnL.jpg[A map, 350, align=center]
+endif::[]
 
 
 == Hello
