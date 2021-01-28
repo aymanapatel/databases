@@ -1,7 +1,18 @@
-Learning SQL
+= Learning SQL
 :toc:
 :icons: font
 
+ifdef::env-github[]
+++++
+<p align="center">
+  <img width="460" height="300" src="https://images-na.ssl-images-amazon.com/images/I/51T2HPBxh5L._SX258_BO1,204,203,200_.jpg">
+</p>
+++++
+endif::[]
+
+ifndef::env-github[]
+image::https://images-na.ssl-images-amazon.com/images/I/51T2HPBxh5L._SX258_BO1,204,203,200_.jpg[A map, 350, align=center]
+endif::[]
 
 > https://learning.oreilly.com/library/view/learning-sql-3rd/9781492057604[Link]
 
