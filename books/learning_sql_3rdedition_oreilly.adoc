@@ -1,0 +1,9 @@
+Learning SQL
+:toc:
+:icons: font
+
+
+> https://learning.oreilly.com/library/view/learning-sql-3rd/9781492057604[Link]
+
+== SQL and Big Data
+
