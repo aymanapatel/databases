@@ -2,4 +2,9 @@
 :toc:
 :icons: font
 
-== Hello
+
+== Indexing
+
+=== Postgres full text indexing vs Elasticsearch
+
+https://rocky.dev/full-text-search/[Link]
