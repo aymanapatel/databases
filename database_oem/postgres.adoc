@@ -8,3 +8,20 @@
 === Postgres full text indexing vs Elasticsearch
 
 https://rocky.dev/full-text-search/[Link]
+
+
+== Table Bloat
+
+In Postgres,  when you do an `UPDATE` or `DELETE`, the row isn't actually physically deleted. 
+For a `DELETE`, it simply marks the row as unavailable for future transactions, and for `UPDATE`, under the hood it's a combined `INSERT` then `DELETE`, where the previous version of the row is marked unavailable.
+
+> aka Ghost Record in MSSQL
+
+NOTE: Check if Oracle has this issue. If not, why?
+
+
+== Blog
+
+
+- https://hakibenita.com/postgresql-unused-index-size[Removing unused Index in Postgres]
+    - https://www.youtube.com/watch?v=Zow5-Pa46MY[Hussein's companion video]
