@@ -19,6 +19,106 @@ endif::[]
 
 == 1. Preface
 
+[red]#Obvious# 
+
+== 2. Create and Populate database
+
+> Book uses MySQL. I used Postgres and found out many differences. Will be adding Table for highlighting the differences
+
+.MySQl vs Postgres
+|===
+| What? | Output | MySQl | Postgres
+
+| Showing character set for different languages
+a| 
+----
+
+----
+
+|
+`mysql> SHOW CHARACTER SET;`
+a|
+----
+plsql> SELECT DISTINCT pg_catalog.pg_encoding_to_char(conforencoding)
+from pg_catalog.pg_conversion;
+
+----
+
+
+|Enum in DDL| trt
+a| 
+----
+mysql> create table cars
+ (
+   // .. other coloumns
+   eye_color ENUM('BR','BL','GR')`
+ );
+----
+
+a|
+[red]#Not available in Postgres#
+----
+plsql> create type color_t as enum('BR','BL','GR');
+
+plsql> create table cars
+ (
+    // .. other coloumns
+   eye_color   color_t
+ );
+
+----
+
+|`UNSIGNED`||`CREATE TABLE <table_name> person_id SMALLINT UNSIGNED,`| [red]#Not available in Postgres# . Need to add CONSTRAINT explicitly.
+
+|`AUTO_INCREMENT`||`ALTER TABLE person MODIFY person_id SMALLINT UNSIGNED AUTO_INCREMENT;`
+a|
+[red]#Not available in Postgres#
+----
+plsql>CREATE SEQUENCE person_id_seq OWNED BY person.person_id;
+CREATE SEQUENCE
+plsql>ALTER TABLE person ALTER COLUMN person_id SET DEFAULT nextval('person_id_seq');
+plsql> INSERT INTO person(person_id, fname, lname, eye_color, birth_date)
+       VALUES (nextval('person_id_seq'), 'William','Turner', 'BR', '1972-05-27');
+----
+
+| Describe table | | `mysql> DESC <table_name>| `plsql> \d <table_name>`
+
+|Invalid Data conversions|
+
+a|
+[red]#Implicit date conversion Not available in MySQL#
+format, you will receive another error. Here’s an example that uses a date format that does not match the default date format of YYYY-MM-DD:
+
+----
+mysql> UPDATE person
+    -> SET birth_date = 'DEC-21-1980'
+    -> WHERE person_id = 1;
+ERROR 1292 (22007): Incorrect date value: 'DEC-21-1980' for column 'birth_date'
+at row 1
+----
+
+
+a|
+
+It converts the date to defined format automatically.
+
+Example:
+
+----
+UPDATE person SET birth_date = 'DEC-01-1991' WHERE fname LIKE 'Will%';
+
+
+ person_id   fname   lname   eye_color birth_date(implicitly converted)
+  1          William Turner  BR        1991-12-01 
+(2 rows)
+----
+
+
+
+
+
+|===
+
 == 18. SQL and Big Data [DONE]
 
 === Apache Drill
