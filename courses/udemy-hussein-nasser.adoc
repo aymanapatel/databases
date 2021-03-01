@@ -153,12 +153,12 @@ If x exists in memory; jack maybe be there (not confirmed though)
 
 ```
 
-Since it is hashed with mod; there will be collisions. Multi-level hash functions can help woth reducing collisions.
+Since it is hashed with mod; there will be collisions. Multi-level hash functions can help with reducing collisions.
 
 Cassandra (and dynamo DB) uses this in Consistant Hashing using SSTables.
 
 
-Ayman NOTE: Merkle tree, SSTable and Boom filter has some correlation. Do not have insight on the relation though.
+NOTE: Merkle tree, SSTable and Boom filter has some correlation. Do not have insight on the relation though.
 
 
 == Section 4: Partitioning
