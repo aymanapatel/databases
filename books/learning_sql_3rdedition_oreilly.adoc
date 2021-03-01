@@ -27,7 +27,7 @@ endif::[]
 
 .MySQl vs Postgres
 |===
-| What? | Output | MySQl | Postgres
+| What? | Output | MySQL | Postgres
 
 | Showing character set for different languages
 a| 
