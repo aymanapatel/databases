@@ -112,6 +112,55 @@ WARNING: Relational and NoSQL do not guarantee **Consistency in READS**
 
 === Index Scan vs Index-only Scan
 
+
+=== Bloom Filter
+
+Scenario: Does username exist
+
+Naive solution: 
+
+```
+GET /username?q=paul
+```
+
+🛑 CONS 🛑 
+
+- Very slow
+
+Better solution:
+
+
+```
+       |--> redis (perodic sync with DB) 
+       |
+client --> server --> DB
+```
+
+
+🛑 CONS 🛑 
+
+- Perodic sync with DB makes it INEFFICIENT
+
+
+Best solution: BOOM Filter
+
+image:https://blog.cloudflare.com/content/images/2020/02/bloom-filter@2x.png[Bloom FIlter]
+
+```
+hash(paul) % 64 = x
+
+If x exists in memory; jack maybe be there (not confirmed though)
+
+```
+
+Since it is hashed with mod; there will be collisions. Multi-level hash functions can help woth reducing collisions.
+
+Cassandra (and dynamo DB) uses this in Consistant Hashing using SSTables.
+
+
+Ayman NOTE: Merkle tree, SSTable and Boom filter has some correlation. Do not have insight on the relation though.
+
+
 == Section 4: Partitioning
 
 
