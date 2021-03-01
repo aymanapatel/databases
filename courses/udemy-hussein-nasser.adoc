@@ -2,7 +2,7 @@
 :toc: 
 :icons: font
 
-== ACID
+== Section 02: ACID
 
 
 
@@ -107,29 +107,39 @@ WARNING: Relational and NoSQL do not guarantee **Consistency in READS**. Replica
 WARNING: Relational and NoSQL do not guarantee **Consistency in READS**
 
 
-== Indexing, Partitioning, Sharding
+== Section 3: Indexing
+
 
 === Index Scan vs Index-only Scan
 
+== Section 4: Partitioning
+
+
 === Horizantal vs Vertical Partitioning
 
-=== SQL Pagination with Offset is evil
-
-== Concurrency Control
+== Section 5: Sharding
 
 
-== DB replication
+
+> SQL Pagination with Offset is evil
 
 
-=== DB System Design
+
+== Section 6: Concurrency Control
+
+
+== Section 7: DB replication
+
+
+== Section 8: DB System Design
 
 === Build URL shortener DB Design
 
 
-== DB Engines
+== Section 9: Introduction to DB Engines
 
 
-=== B-Tree DB Engines
+== Section 10: B-Tree DB Engines
 
 ==== MyISAM
 
@@ -146,17 +156,22 @@ WARNING: Relational and NoSQL do not guarantee **Consistency in READS**
 ==== BerkleyDB
 
 
-=== LSM Tree DB Engines
+=== Section 11: LSM Tree DB Engines
 
 ==== LevelDB
 
 ==== RocksDB
 
+== Section 12: Database Engines Demo
 
-== DB Security
+== Section 13: Database Cursors
+
+== Section 14: DB Security 
+
+== Section 15: Homomorphic Encryption (Search Encrypted Databases)
 
 
-== Miscellaneous DB Discussion
+== Section 16: Miscellaneous DB Discussion
 
 
 === Distributed Transaction
