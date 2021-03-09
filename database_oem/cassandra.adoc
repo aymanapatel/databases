@@ -1,5 +1,87 @@
-= Cassandra
+= Cassandra: The Definitive Guide
 :toc:
 :icons: font
 
 == Hello
+
+
+== Chapter 01: Why not RDBMS?
+
+=== Scalability issues in relational DBs
+
+1. Throw new Hardware aka Vertical scaling
+
+2. Once box is fullm you add additional box in DB cluster. ow issue of data replication and consistency arises.
+
+3. Upgrade config of DBMS for optimizing DB data in Filesystem. This is undesirable since it requires to log off DB.
+
+4. Try to improve indexes, optimize queries, reorganizing joins. Handle some of these at Application layer which can be prone to error/production issue.
+
+5. Employ a caching layer. This creates consistency problem between updates in cache and database. (exacerablated in a cluster)
+
+6. Denormalize data for faster access. But this vilated normalized forms definitions
+
+=== Sharding and Share-Nothing Architecture
+
+A possibe solution for horizontally scaling RDBMS is through *sharding* (partitioning but across machines/clusters)
+
+For sharding, a shard structure is to be determined to spit the data:
+
+1. Feature-based or functional segmentation
+
+Segment data based on features that do not overlap with each other very much. Example, in e-commerce we can have table `users` in one shard and `items` in other shard. This approach requires a thorough understanding of the domain.
+
+2. Key-based sharding
+
+Find a key in your data to evenly distribute it across shards. Using some sort of one-way hash key on a key data element; and distribute data according to the hash.
+
+3. Lookup table or directory based sharding
+
+Use a look up table. 🚨 Performance hit for lookup and lookup table becomes single point of failure. 
+
+
+
+== Chapter 02: Introducing Cassandra
+
+
+
+== Chapter 03: Installation
+
+> Check Github Repo and this book for information
+
+
+
+== Chapter 04: Cassandra Query Language
+
+
+== Chapter 05: Data Modelling
+
+
+== Chapter 06: Cassandra Architecture
+
+
+== Chapter 07: Designing Applciations with Cassandra
+
+
+== Chapter 08: Application Development with Drivers
+
+
+== Chapter 09: Writing and Reading Data
+
+
+== Chapter 10: Configuring and Deploying Cassandra
+
+
+== Chapter 11: Monitoring
+
+
+== Chapter 12: Maintainence
+
+
+== Chapter 13: Performance Tuning 
+
+
+== Chapter 14: Security
+
+
+== Chapter 15: Migrating and Integrating
