@@ -1,6 +1,6 @@
 = Databases
 :toc:
-:stem:
+:stem: latexmath
 
 
 
