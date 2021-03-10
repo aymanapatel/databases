@@ -1,9 +1,14 @@
 = Databases
 :toc:
+:stem:
 
-```math
+
+
+[stem]
+++++
 a^2+b^2=c^2
-```
+++++
+
 
 == Courses/Books/Links
 
