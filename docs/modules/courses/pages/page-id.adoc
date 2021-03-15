@@ -1,0 +1,110 @@
+= Page IDs and Cross References
+:page-aliases: asciidoc:page-to-page-xref.adoc
+:family: page
+:colon: :
+
+[#whats-a-page-id]
+== What's a page ID?
+
+In order for a page to be referenced, that page must have an identifier--a page ID.
+An [.term]*Antora page ID* is a unique and reliable set of identifying coordinates, organized in a standard sequence, that are constructed from the properties assigned to each page's source file.
+A page ID is most often used as a target in an AsciiDoc xref macro, but it can also be assigned to certain attributes and keys.
+
+[#id-coordinates]
+== What are the page ID coordinates?
+
+Antora constructs a page ID for a page source file from the key-value pairs specified in a xref:ROOT:component-version-descriptor.adoc[component version descriptor] and the xref:ROOT:standard-directories.adoc[standard directory set].
+Using this information, each page can be cross referenced using a sequence of page ID coordinates.
+
+The coordinates are organized into the standard sequence shown below.
+
+image::page-id-diagram.svg[Diagram of an Antora page ID,400]
+
+include::partial$antora-id.adoc[tags=*;!resource]
+
+A page ID is used in an <<xref-macro,AsciiDoc xref macro>> to create a link from one page to another page.
+They're also used to create the links in a xref:navigation:xrefs-and-link-text.adoc[component version's navigation files].
+
+[#whats-a-cross-reference]
+== What's a cross reference?
+
+A [.term]*cross reference* indicates that an element in a page, such as a term or concept, is related to information on another page.
+Cross reference is often abbreviated to *xref*.
+
+A cross reference is created using the AsciiDoc xref macro and the <<whats-a-page-id,page ID>> of the target page.
+[[target-page]]The [.term]*target page* is the page the xref will link the site visitor to.
+[[current-page]]The [.term]*current page* is the page containing the xref that links to the target page.
+When a visitor clicks on an xref in the current page, that is, the page they're currently viewing, they'll be redirected to the target page.
+
+[#xref-macro]
+== AsciiDoc xref macro
+
+An AsciiDoc xref macro needs to be supplied with a valid <<whats-a-page-id,page ID>> in order to create a link to the target page when the site is generated.
+How many page ID coordinates you need to specify depends on the component version and module of the <<current-page,current page>> in relation to the <<target-page,target page>>.
+
+First, let's review the AsciiDoc xref macro syntax.
+
+image::xref-macro-diagram.svg[Diagram of an AsciiDoc xref macro with an Antora page ID,600]
+
+//role=grow-x
+xref{colon}::
+The prefix of the AsciiDoc xref macro.
+
+target page ID:: The <<id-coordinates,page ID coordinates>> of the target page relative to the current page.
+
+[#id-fragment]
+#fragment::
+The element ID that links to a section, block, or inline location within the target page.
+A fragment is always optional.
+The fragment starts with the hash symbol (`#`).
+A page's `reftext` (and `navtitle`) isn't used as <<link-text,the default link text>> when a fragment is specified.
+
+[#link-text]
+[link text]::
+When a visitor clicks on the link text that's displayed on the current page in the published site, they're directed to the target page.
+The link text is optional.
+If no link text is specified in the xref macro's square brackets (`[]`), the xref:reftext-and-navtitle.adoc[reftext or navtitle of the target page is displayed].
+
+Here's how an xref macro with a fully qualified page ID looks in practice:
+
+[subs=attributes+]
+----
+See xref:{page-component-version}@antora:ROOT:how-antora-works.adoc[].
+----
+
+Specifying the version, component name, and even module every time seems verbose, right?
+Don't worry, the more related the current and target pages are, the less coordinates you need to enter in the page ID.
+For instance, if the target and current pages belong to the same component version and module, you only need to specify the page coordinate of the target page.
+
+xref:module-and-page-xrefs.adoc[] has several examples showing how to create xrefs to pages that belong to the same module or component version.
+For xref examples where the target and current pages belong to different components or different versions of the same component, see xref:version-and-component-xrefs.adoc[].
+
+[#important]
+== Why are page IDs important?
+
+*They're not coupled to a published URL* because they're a source-to-source reference.
+Notice the page coordinate ends with [.path]_.adoc_, the file extension of an AsciiDoc source file.
+Regardless of whether you're deploying your site locally, to a staging or production environment, or you change URL strategies, the page ID always remains the same.
+The xref locks on to the target page and produces a URL that points to it wherever it gets published.
+
+*They're minimally coupled to the filesystem* by using an identifier based on the Antora's virtual component version classification system.
+
+*They've eliminated the relative path (../../) problem* by specifying the page as a pages-relative path.
+The path always starts from a module's [.path]_pages_ directory, even when the referencing page is located inside a topic folder.
+//If you move or rename a page within a module, you don't have to change any references to other pages.
+
+*This human-friendly referencing system saves you from having to do computations in your head while writing*.
+You just specify the coordinates of the page you want to reference.
+There's no need to worry about the source file's physical location on disk or its published URL.
+All you need to know are the names of your components, versions, modules, and pages so you can fill in this information.
+
+////
+This needs to go in a section about future development.
+
+Of course, inbound references to the page you move do have to be updated.
+To counter this, you could pin the page ID of the page you want to move, thus adding more stability.
+That way, references to the page don't have to be updated even when it moves.
+Though, a little help from the text editor to "`refactor`" references could make this abstraction unnecessary.
+
+*We've made it possible to validate and update references* by using a well-defined pattern that's easy for a script to locate, parse, and rewrite.
+////

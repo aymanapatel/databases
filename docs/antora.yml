@@ -19,6 +19,7 @@ nav:
 - modules/ROOT/nav-component-versions.adoc
 - modules/page/nav.adoc
 - modules/asciidoc/nav.adoc
+- modules/courses/nav.adoc
 - modules/navigation/nav.adoc
 - modules/playbook/nav.adoc
 - modules/ROOT/nav-generate.adoc

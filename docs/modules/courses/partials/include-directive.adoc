@@ -1,0 +1,44 @@
+== AsciiDoc include directive
+
+<<ex-base>> shows the structure of an include directive with a {family}'s fully qualified resource ID.
+
+[#ex-base]
+.Include directive and resource ID syntax
+[subs=attributes+]
+----
+\include::version@component:module:{coordinate}{family}-filename{ext}[]
+----
+
+Let's break down the AsciiDoc syntax and resource ID coordinates you need to include a {family} resource into a page.
+
+The steps below assume that the target {family} and current page belong to the same component version and module, so only the xref:resource-id.adoc#id-family[{coordinate}] and xref:resource-id.adoc#id-resource[resource] coordinates of the xref:resource-id.adoc#target-resource[target {family} resource] are entered in the resource ID.
+
+. On a new line, enter the name of the directive followed by two colons, `include::`.
++
+[subs=+quotes]
+----
+**include::**
+----
+
+. Enter the resource ID of the target {family} file.
+The resource ID must specify the `{coordinate}` family coordinate since the include directive is also used to insert files from other families.
++
+[subs="attributes+,+quotes"]
+----
+include::**{coordinate}{family}-filename{ext}**
+----
+
+. Close the directive with a set of square brackets (`+[]+`).
++
+[subs="attributes+,+quotes"]
+----
+include::{coordinate}{family}-filename{ext}**[]**
+----
+
+. The brackets can contain an optional list of attributes.
+The attributes are entered as key-value pairs separated by commas.
++
+[subs="attributes+,+quotes"]
+----
+include::{coordinate}{family}-filename{ext}**[attribute,attribute]**
+----

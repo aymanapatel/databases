@@ -1,0 +1,66 @@
+= Include a Partial
+:family: partial
+:coordinate: partial$
+:ext: .adoc
+:xrefstyle: short
+:listing-caption: Example
+:page-aliases: asciidoc:include-partial.adoc
+// URLs
+:url-adoc-manual: https://asciidoctor.org/docs/user-manual
+:url-tags: {url-adoc-manual}/#by-tagged-regions
+:url-leveloffset: {url-adoc-manual}/#include-partitioning
+
+A partial can be inserted into any page or another partial in your site using the AsciiDoc include directive and the partial's resource ID.
+
+include::partial$include-directive.adoc[]
+
+=== Include directive placement
+
+----
+A paragraph in the standard page.
+
+include::partial$cli-options.adoc[] // <1>
+
+Another paragraph in the standard page.
+include::partial$addendum.adoc[] // <2>
+----
+<1> Enter the include on a new line.
+If you want the partial contents to be a standalone block, make sure there's a blank line above and below it.
+<2> To attach the partial to another block, enter it on a new line but don't insert a blank line between the include and the block content.
+
+== Include a partial from another module
+
+When the target partial file and the current page belong to different modules of the same component version, enter the partial's module, family (`partial$`), and resource coordinates in the resource ID.
+
+.current-page.adoc
+----
+\include::ROOT:partial$defs.adoc[]
+----
+
+== Include a partial from another component
+
+When the target partial file and the current page belong to different docs components, enter the partial's version, component, module, family (`partial$`), and resource coordinates in the resource ID.
+
+.current-page.adoc
+----
+\include::2.0@catalog::partial$defs.adoc[]
+----
+
+Don't specify the version coordinate if you want a page to always reference the latest version of the partial.
+
+.current-page.adoc
+----
+\include::catalog::partial$defs.adoc[]
+----
+
+//== Include a tagged region from a partial
+
+== Learn more
+
+* xref:include-an-example.adoc[Include an example]
+* xref:include-a-page.adoc[Include a standard page]
+* xref:resource-id.adoc[Resource IDs]
+
+.*Asciidoctor resources*
+* {url-leveloffset}[Offset section headings with leveloffset^]
+* {url-tags}[Select regions of content with tags^]
