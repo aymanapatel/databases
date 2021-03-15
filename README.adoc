@@ -1,0 +1,6 @@
+
+= To run
+
+```
+antora --fetch sample-playbook.yml
+```
