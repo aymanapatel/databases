@@ -1,0 +1,102 @@
+= How Antora Works
+//The playbook is a configuration file that contains an inventory of documentation component names, branches, and addresses.
+
+Antora's default site generator handles all aspects of creating a documentation site, from fetching and aggregating to converting and arranging the content to publishing the files of the generated site.
+This page describes that process in detail.
+
+The default pipeline is opinionated to get you started as quickly as possible.
+But understand that Antora features a modular, open architecture.
+That means this architecture can accommodate specialized use cases by allowing custom Antora components, such as a validators, to be inserted into the pipeline at strategic points as needed.
+This page focuses on the core, built-in Antora components and capabilities in Antora.
+
+== Steps in the default generator pipeline
+
+The steps listed in this section describe the operations the default site generator performs.
+Certain operations are executed asynchronously, so some of the steps below may occur in a different order or happen simultaneously.
+For example, the UI is fetched and loaded while the content is being aggregated to optimize use of the network.
+
+Build playbook::
+When you're ready to generate a site, you pass Antora a playbook file and tell it to run.
++
+A xref:playbook:index.adoc[playbook file is simple a configuration file] that can be written in YAML, JSON, or TOML.
+It contains information and settings such as what content to use, how the content should be processed, how the site should be generated, and where to publish the output.
++
+Antora reads the playbook file and builds a playbook from it, which it then uses to drive the pipeline.
+
+Load content repositories::
+Using the xref:playbook:configure-content-sources.adoc[content sources] listed in the playbook, Antora loads the specified git repositories or local content folders in preparation to scan them for content files.
++
+For each remote URL, Antora clones the remote git repository into a local cache using the built-in git client.
+If the repository has already been cloned, Antora fetches updates if configured to do so.
++
+Finally, Antora determines which references (branches, tags, and start paths) to use from the specified repositories.
+
+Find the content source roots::
+Starting at a xref:content-source-repositories.adoc[content source root], Antora identifies a group of files as being part of a component version when it finds a component version descriptor file named [.path]_antora.yml_.
+These source files can be stored in a single repository, at the root of a repository or in a subpath, or distributed across multiple repositories.
+
+Transform input files into virtual file objects::
+Antora collects all of the files--text, images, samples, and other supporting materials--from each xref:standard-directories.adoc[content source root subtree].
+Then it creates a virtual file of each input file.
+
+Assign files to component version buckets::
+Antora reads the component version descriptor ( [.path]_antora.yml_) files.
++
+A xref:component-version-descriptor.adoc[component version descriptor] associates the files under it with a specified component name and version, that is, a component version.
+This allows the files to be decoupled from the repository in which they live and makes Antora's URL agnostic xref:page:page-id.adoc[cross references] possible.
++
+Antora assigns the descriptor information and other source metadata to the virtual files.
+Then it sorts each file into a virtual collection based on the assigned component version data.
++
+A xref:component-version.adoc[component version] typically represents a discrete and unique version of the documentation for a project, library, service, or training course.
+
+Compute additional metadata::
+Using xref:playbook:configure-site.adoc[site properties] from the playbook and information assigned to the files in the previous step, Antora adds module, family, family-relative path, and other metadata values to each file.
+It also computes the output path (disk) and publish path (URL) information for each publishable file.
+
+Organize files into a content catalog::
+Antora further sorts the aggregated files into a content catalog that can be queried and transmitted.
+
+// add pages xref when page is available
+Convert AsciiDoc files to embeddable HTML::
+The AsciiDoc files in the xref:pages-directory.adoc[page family] of the content catalog are converted to embeddable HTML with Asciidoctor.js.
+
+Convert navigation files::
+Antora retrieves xref:navigation:index.adoc[navigation files] from the content catalog, translates their contents into navigation items organized in a specified hierarchy (navigation trees grouped inside a navigation menu), and returns a navigation model.
+
+Locate and fetch UI bundle::
+Antora finds the xref:playbook:configure-ui.adoc[UI bundle using the URL listed in the playbook] and fetches it.
+The UI bundle can be cached locally or remote.
+
+Transform UI files into virtual file objects::
+Antora extracts the UI files in the bundle and creates a virtual file object for each file containing the file's contents and path information.
+
+Classify UI files::
+Antora identifies the static UI files using the UI descriptor file ([.path]_ui.yml_) and sets the file type to static.
+It sets the type for all other files based on their location (asset, layout, helper, partial).
+
+Compute UI file output paths::
+For each UI file that is publishable (of type static or asset), Antora computes its output path.
+
+Organize UI files into UI catalog::
+The virtual UI files are sorted into a transmittable collection.
+
+Wrap converted AsciiDoc content in page templates::
+Antora determines which page template each page requests.
+It populates the identified UI template with the page's embeddable HTML, site metadata, context data (component, version) for page, version, and product selectors, and navigation model information for menus and breadcrumbs.
++
+Relying on a page template to produce the pages gives the site owner complete control over the construction of the pages, and thus complete control over the UI.
+
+Produce sitemap::
+Antora generates a site map that can be used as an internal report or published with the site.
+This sitemap is partitioned by component name (using a sitemap index).
+The sitemap index links to the sitemap for each component name, which is where the URLs for the individual pages can be found.
+
+Publish site::
+Antora writes the generated pages to a default or xref:playbook:output-dir.adoc[user-specified location].
+The site can be published in multiple formats to multiple locations over multiple protocols using xref:playbook:configure-output.adoc[built-in and custom destination providers].
+
+It's possible to substitute this pipeline (the default site generator) with a custom one.
+You first need to create a library or script that exports the function with signature `generateSite(args, env)`.
+Within that script, you're free to import core components from Antora to reassemble your own pipeline.
+You then activate your pipeline by passing the name of the library or script to the `--generator` option of the xref:cli:index.adoc[Antora CLI].

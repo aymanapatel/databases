@@ -1,0 +1,39 @@
+= Examples Directory and Files
+
+[#examples-dir]
+== Examples family directory
+
+A module directory can contain an xref:family-directories.adoc[optional family directory] named [.path]_examples_.
+
+----
+📂 modules
+  📂 a-named-module
+    📂 examples <1>
+      📄 a-source-file.js <2>
+  📂 ROOT
+    📂 examples <3>
+      📄 a-source-file.csv <4>
+      📄 a-source-file.json
+    📂 pages
+      📄 a-source-file.adoc
+    📄 nav.adoc
+----
+<1> An [.path]_examples_ family directory in a named module directory
+<2> An example source file
+<3> An [.path]_examples_ family directory in a [.path]_ROOT_ module directory
+<4> An example source file
+
+Antora applies preset behavior to the source files stored in an [.path]_examples_ directory when it generates a site.
+
+[#examples]
+== Examples
+
+xref:page:examples-and-source-snippets.adoc[Examples] are resources, such as source code (e.g., [.path]_runner.js_), terminal output, and data sets (e.g., [.path]_choptank-co2.csv_).
+The source files for examples are stored in an [.path]_examples_ directory.
+Examples shouldn't be confused with the AsciiDoc example block, though they can be inserted into an example block using an include directive.
+
+If an example isn't referenced in an AsciiDoc include directive, its content won't be published to a site.
+Examples and tagged regions in an example can be inserted into any page or partial, regardless of the module or component version it belongs to, using the xref:page:include-an-example.adoc[include directive] and the example's xref:page:resource-id.adoc[resource ID].
+
+When referencing an example, the `example$` family coordinate must be included in its resource ID.
+This coordinate is required because the include directive is also used to reference xref:partials-directory.adoc[partials] and, occasionally, xref:pages-directory.adoc[pages].

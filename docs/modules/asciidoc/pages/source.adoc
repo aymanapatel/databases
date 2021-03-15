@@ -1,0 +1,110 @@
+= Source Blocks
+// URLs
+:url-highlightjs: https://highlightjs.org
+
+On this page, you'll learn:
+
+* [x] How to show a source block (aka program listing or code block) with AsciiDoc.
+* [x] How to specify the source language of a source block.
+* [x] How to enable syntax highlighting for source blocks.
+
+== Source block syntax
+
+A source block is used to show a snippet of source code (aka program listing or code block) in a given programming language.
+The snippet is usually shown colorized using a syntax highlighter.
+
+In AsciiDoc, a source block is a specialized type of listing (or literal) block.
+This specialization is done by adding the `source` keyword in the first positional attribute slot in the block attribute list.
+
+.Source block syntax
+[source]
+....
+[source]
+----
+# Insert logic here
+----
+....
+
+Here's how that block appears when rendered:
+
+----
+# Insert logic here
+----
+
+Notice there's no syntax highlighting.
+That's because we haven't specified a source language.
+
+== Specify a source language
+
+When you create a source block, you need to specify which programming language the source is written in.
+Specifying the source language serves two purposes.
+First, it communicates to the reader which programming language runtime (or data format reader) is needed to interpret the code.
+Second, it allows the syntax highlighter to colorize the source properly, such as emphasizing language types and keywords.
+
+You can specify the source language by adding the name of the language in lowercase in the second positional attribute slot in the block attribute list.
+
+.Source block with language
+[source]
+....
+[source,ruby]
+----
+puts 'Hello, World!'
+----
+....
+
+Here's how that block appears when rendered:
+
+[source,ruby]
+----
+puts 'Hello, World!'
+----
+
+Notice that when you hover over the block, you see the language appear in the upper right corner.
+Also notice that the source is colorized.
+We'll look at how colorization gets added in the next section.
+
+Alternately, you can define the source language globally, either at the page, component version, or site level, by setting the `source-language` attribute.
+Here's an example of how to set the source language for an entire page:
+
+.Source language set globally
+[source]
+....
+= Page Title
+:source-language: ruby
+
+[source]
+----
+puts 'Hello, World!'
+----
+....
+
+== Enable syntax highlighting
+
+By default, Antora uses highlight.js to add syntax highlighting to source blocks that specify a source language.
+Syntax highlighting is a technique of colorizing the code to make it easier to read by emphasizing types, keywords, and other language constructs.
+There's nothing you need to do to enable this feature.
+
+Syntax highlighting of source blocks on the AsciiDoc side is enabled using the `source-highlighter` attribute.
+This attribute is set site-wide by default in Antora (see xref:page:intrinsic-attributes.adoc#site-and-configuration-attributes[site and configuration attributes]).
+
+Syntax highlighting also requires a contribution from the UI, which bundles the highlight.js library (both the JavaScript and the CSS) and adds it to each page.
+
+You can override the `source-highlighter` attribute in the playbook or component descriptor.
+For instance, to disable syntax highlighting, unset the `source-highlighter` attribute in your playbook.
+
+[source,yaml]
+----
+asciidoc:
+  attributes:
+    source-highlighter: ~
+----
+
+Currently, the only `source-highlighter` value Antora supports when using the default UI is highlight.js.
+If you set the value to rouge, pygments, or coderay, Antora will fail.
+That's because these built-in, build-time syntax highlighters are not available in the Antora environment (and specifically Asciidoctor.js).
+
+You can use other client-side (aka browser) libraries, such as prettify or prism.
+However, to use them, you'll need to modify the UI to bundle and add the library to each page, like the default UI does for highlight.js.
+
+In the future, it will be possible to register additional adapters to plug in other syntax highlighters.
+However, that feature is not currently available in Antora.

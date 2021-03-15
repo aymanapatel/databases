@@ -1,0 +1,30 @@
+= Format List Content
+
+Link text and unlinked text can be formatted with AsciiDoc's inline formatting syntax.
+
+== Unlinked text
+
+You don't have to link all of the content in a navigation list to a page, resource, or external site.
+
+.nav.adoc
+[source]
+----
+* Unlinked Text
+** xref:a-page.adoc[Linked Text]
+* _Formatted Unlinked Text_
+----
+
+Unlinked text can be formatted using AsciiDoc's inline formatting syntax.
+
+== Link text
+
+Link text that's entered into an xref, link, or URL macro can be formatted using inline AsciiDoc syntax.
+
+.nav.adoc
+[source]
+----
+* xref:index.adoc[*Bold link text*]
+* https://external-website.com[Some __ita__lic letters]
+----
+
+To format a page's default link text, you'll need to xref:page:reftext-and-navtitle.adoc#navtitle[markup the value assigned to navtitle].

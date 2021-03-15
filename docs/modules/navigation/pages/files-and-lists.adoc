@@ -1,0 +1,88 @@
+= Navigation Files and Lists
+:page-aliases: list-structures.adoc
+
+All of the source files that belong to a component version's `pages` family are automatically published to your site by Antora.
+That means visitors can find a page using search tools, links on other site pages, and in some scenarios, through dropdown menus such as the page version selector.
+In order for visitors to locate and go to a page using a component version page menu, a cross reference targeting that page must be entered into a list in a navigation file.
+
+[#whats-a-nav-file]
+== What's a navigation file?
+
+A [.term]*navigation file* is one or more lists of page cross references, external URLs, and other content that is marked up in AsciiDoc and stored at the base of a xref:ROOT:module-directories.adoc[module directory].
+If registered in an [.path]_antora.yml_ file, the contents of the navigation file will be incorporated into a component version page menu and published to a site.
+
+=== Filename and format
+
+Navigation files must end with the AsciiDoc file extension (_.adoc_).
+They're typically named [.path]_nav.adoc_; however, you can use any name that is meaningful to you.
+Name your navigation files [.path]_kaboom.adoc_ if that makes your team happy.
+
+[#list-structure]
+== List structure
+
+A navigation list is an xref:asciidoc:ordered-and-unordered-lists.adoc#unordered[unordered AsciiDoc list].
+Each top-level list item can nested items up to level five (`+*****+`).
+
+.Single list structure
+[source]
+----
+* Top level item
+** Second level item
+*** Third level item
+*** Third level item
+** Second level item
+*** Third level item
+**** Fourth level item
+***** Fifth level item
+* Top level item
+* Top level item
+----
+
+A top-level list item is a list title, which is denoted by a dot (`.`), or, when there isn't a list title, each list item that's marked by a single asterisk (`+*+`).
+When a xref:multiple-lists.adoc[file contains multiple lists], each list must be initiated with a list title.
+
+.Multiple list structure
+[source]
+----
+.List title and top level item
+* List item
+
+.List title and top level item
+* List item
+** List item
+----
+
+If a navigation file only contains one list, a list title is optional.
+In a xref:single-list.adoc[single list navigation file], each item with a single asterisk marker (`+*+`) effectively becomes a top-level item.
+
+You can compose your navigation by combining files using the include directive.
+Each included file must be located in a partials directory.
+If you want the navigation list in the included file to be added as a child of the current item, you should enclose the include directive in an open block.
+Refer to the xref:include-lists.adoc[] page to learn how to build the navigation from multiple files.
+
+== List titles and items
+
+List titles and items in a navigation file can contain several types of content, such as cross references to pages, links to external sites, and regular and formatted text.
+The most common items in a navigation file are xrefs to pages that belong to the same component version and module, but a target page ID can be for pages in other modules and components, too.
+
+[source]
+----
+.The Special Project <1>
+* xref:index.adoc[] <2>
+** xref:ROOT:get-started.adoc[] <3>
+** xref:team::contributing.adoc[] <4>
+
+._Support_ <5>
+* https://support.project.com[Get Help] <6>
+* xref:help.adoc[*Troubleshooting*] <7>
+----
+<1> Regular, unlinked text.
+<2> Xref to a page that belongs to the same module as the navigation file.
+Antora will apply the target page's xref:xrefs-and-link-text.adoc[default navigation link text] when the site is generated.
+<3> Xref to a page that doesn't belong to the same module as the navigation file.
+<4> Xref to a page that doesn't belong to the same component as the navigation file.
+<5> Unlinked text with xref:format-content.adoc[inline formatting].
+<6> xref:external-links.adoc[Link to an external website].
+<7> Xref with formatted link text.
+
+List items can xref:reference-resources.adoc[reference attachments], too.

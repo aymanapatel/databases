@@ -1,0 +1,53 @@
+= Recommendations for Module Directory Names
+:xrefstyle: short
+:listing-caption: Example
+
+When you're creating module directories, you need to consider how your team will use the files stored in them and how their names will affect your site's URLs.
+
+== Selecting module folder names
+
+Antora assigns the xref:named-module-directory.adoc#named-module[name of a module] from the name of a xref:module-directories.adoc#module-dir[module folder].
+A module name is used in xref:page:page-id.adoc[page IDs] and the xref:page:resource-id.adoc[resource IDs] of images, examples, and partials.
+It's also used in the xref:module-url-segment.adoc#named-module-urls[URLs of the pages assigned to that module] (except for the ROOT module).
+
+When choosing a module folder name, keep the following requirements and recommendations in mind:
+
+* Named module directories *can't contain blank spaces or forward slashes (`/`)*.
+These characters aren't permitted in the targets of AsciiDoc cross references, image macros, or include directives.
+* If possible, *don't use uppercase letters, underscores (`_`), and other characters that aren't recommended in URLs*.
+Such characters can limit web server portability, downgrade site search results, and cause visitor accessibility problems.
+* If your team often references pages, examples, images, or partials across modules, they'll have to type a module's name in page and resource IDs, so *don't make the folder name, and hence the module name, too long or hard to remember*.
+Good module names are short and descriptive.
+
+<<ex-named>> shows a set of standard directories with three named module directories.
+
+[#ex-named]
+.Three named module directories
+----
+📒 repository
+  📂 docs
+    📄 antora.yml
+    📂 modules
+      📂 gear <1>
+        📂 images
+          📄 a-source-file.jpg
+      📂 la-garita <2>
+        📂 pages
+          📄 a-source-file.adoc
+      📂 ROOT <3>
+        📂 pages
+          📄 a-source-file.adoc
+        📄 nav.adoc
+      📂 sdk <4>
+        📂 examples
+          📄 a-source-file.js
+        📂 pages
+          📄 a-source-file.adoc
+        📄 nav.adoc
+----
+<1> Module directory named [.path]_gear_
+<2> Module directory named [.path]_la-garita_
+<3> [.path]_ROOT_ module directory
+<4> Module directory named [.path]_sdk_
+
+Antora would calculate the following module names from the named module directories in <<ex-named>>: `gear`, `la-garita`, and `sdk`.

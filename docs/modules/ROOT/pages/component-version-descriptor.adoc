@@ -1,0 +1,39 @@
+= What's antora.yml?
+:page-aliases: component-descriptor.adoc
+
+[.path]_antora.yml_ is a configuration file that serves two crucial functions.
+
+. The presence of an [.path]_antora.yml_ file at a content source root signals to Antora that it should find a sibling [.path]_modules_ directory that contains source files that belong to a component version.
+. The [.path]_antora.yml_ file at a content source root provides the required and optional component version metadata that Antora assigns to the source files it collects from the standard directories located in the [.path]_modules_ folder.
+
+[#locate-content-source-root-with-antora-yml]
+== Why is antora.yml stored at a content source root?
+//Why does Antora look for antora.yml at a content source root?
+//How does Antora use an antora.yml file to find a component version's source files?
+
+//A xref:playbook:index.adoc[playbook] tells Antora what xref:playbook:configure-content-sources.adoc[remote repositories and local content sources] it should fetch.
+Starting at each content source root, Antora looks for an [.path]_antora.yml_ file.
+When it finds [.path]_antora.yml_, it searches for a  xref:module-directories.adoc[sibling _modules_ directory] and considers all of its xref:standard-directories.adoc[subdirectories and files] to be part of a xref:component-version.adoc[component version].
+
+If Antora doesn't find [.path]_antora.yml_ at a content source root, it doesn't look for a [.path]_modules_ directory or collect any files from that location.
+This minimizes the chances of Antora wasting memory and CPU time to process source files that aren't part of a documentation site.
+
+The [.path]_antora.yml_ files provide the ability to store your content source files anywhere in a directory hierarchy.
+As long as the xref:content-source-repositories.adoc#content-source-root[content source root] contains an [.path]_antora.yml_ file, you can maintain and manage your content source files in a repository that also stores application code, tests, and other materials.
+
+[#provide-metadata-with-antora-yml]
+== What information does antora.yml provide?
+
+An [.path]_antora.yml_ file is referred to as a [.term]*component version descriptor* because it provides required and optional information that identifies, describes, and configures a xref:component-version.adoc[component version].
+In turn, this metadata and configuration is applied to all of the source files that belong to the component version.
+
+This is why Antora can collect files from multiple repositories, directories, branches, and tags, and compile them into a single component version.
+Instead of processing files based on their file system or repository location, Antora converts files based on the information assigned to the source files by a component version descriptor file.
+
+An [.path]_antora.yml_ file contains the following required keys:
+
+include::partial$required-component-version-keys.adoc[]
+
+An [.path]_antora.yml_ file can also contain any of the following optional keys:
+
+include::partial$optional-component-version-keys.adoc[]

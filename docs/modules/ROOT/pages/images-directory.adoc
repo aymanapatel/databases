@@ -1,0 +1,33 @@
+= Images Directory and Files
+
+[#images-dir]
+== Images family directory
+
+A module directory can contain an xref:family-directories.adoc[optional family directory] named [.path]_images_.
+
+----
+📂 modules
+  📂 ROOT
+    📂 images <1>
+      📄 a-source-file.gif <2>
+      📄 a-source-file.jpg
+    📂 pages
+      📄 a-source-file.adoc
+    📄 nav.adoc
+----
+<1> An [.path]_images_ family directory in a [.path]_ROOT_ module directory
+<2> An image source file
+
+Antora applies preset behavior to the source files stored in an [.path]_images_ directory when it generates a site.
+
+[#images]
+== Images
+
+xref:page:images.adoc[Images] are resources, such as photographs, diagrams, and screenshots.
+The source files for images are stored in an [.path]_images_ family directory.
+Antora supports the PNG, JPG, SVG, and GIF (static and animated) image file formats.
+
+An image can be embedded into any page or partial, regardless of the module or component version it belongs to, using its xref:page:resource-id.adoc[resource ID] and an AsciiDoc xref:page:block-images.adoc[block image macro] or xref:page:inline-images.adoc[inline image macro].
+If an image isn't referenced in an AsciiDoc image macro, its content won't be published to a site.
+
+include::partial$assets-directory.adoc[]

@@ -1,0 +1,152 @@
+= Intrinsic Attributes
+:page-aliases: page-and-site-attributes.adoc
+
+Antora automatically assigns information about the runtime environment, site configuration, and current page to various document and page attributes.
+We refer to these as [.term]*intrinsic attributes*.
+Antora uses these attributes to propagate information about the site and current page to the AsciiDoc content, extensions, and UI templates.
+
+Unlike other built-in attributes, such as xref:page-aliases.adoc[page-aliases], intrinsic attributes are meant to be a conduit to pass information from Antora to the page.
+Therefore, *intrinsic attributes are intended to be read-only and should not be reassigned*.
+
+[#environment-attributes]
+== Intrinsic environment attributes
+
+Intrinsic environment attributes communicate to the document (or document extension) that the document is being processed by Antora.
+These attributes are set on every page in the site.
+
+* `env=site`
+* `env-site`
+* `site-gen=antora`
+* `site-gen-antora`
+
+You might use these attributes in an preprocessor conditional to include or exclude content based on whether the document is being process by Antora.
+For example:
+
+[source]
+----
+\ifndef::site-gen-antora[]
+\include::local-preview-settings.adoc[]
+\endif::[]
+----
+
+You can define additional environment attributes in the playbook.
+
+[#site-and-configuration-attributes]
+== Site and configuration attributes
+
+Antora sets various attributes to configure the AsciiDoc processor.
+
+* `attribute-missing=warn`
+* `!data-uri`
+* `icons=font`
+* `sectanchors`
+* `source-highlighter=highlight.js`
+
+These attributes are intended to be reasonable defaults.
+Unlike other intrinsic attributes, they *can* be reconfigured using the CLI or playbook.
+They can also be redefined in such a way that they can be overridden by the component descriptor or page.
+
+CAUTION: The only syntax highlighter that Antora currently supports for source blocks is highlight.js.
+Therefore, it doesn't make sense to change the `source-highlighter` attribute to any other value.
+If you'd like to disable syntax highlighting on source blocks, you can disable this attribute.
+
+Antora also passes general site information using attributes.
+
+* `site-title`
+* `site-url`
+
+The values of these attributes match the values defined in the playbook.
+
+[#page-attributes]
+== Intrinsic page attributes
+
+Antora passes various information about the current page through page attributes.
+These attributes are reassigned for each page as well as each xref:navigation:files-and-lists.adoc[navigation file].
+
+[cols="1,2,1"]
+|===
+|Attribute |Description |Example Output
+
+|`page-component-display-version`
+|The xref:ROOT:component-display-version.adoc[display version] of the component version as specified in _antora.yml_.
+|7.1 Beta
+
+|`page-component-name`
+|The xref:ROOT:component-name-and-version.adoc#name-key[component name] of the component version as specified in _antora.yml_.
+|silver-leaf
+
+|`page-component-title`
+|The xref:ROOT:component-title.adoc[component title] of the component version as specified in  _antora.yml_.
+|Silver Leaf
+
+|`page-component-version`
+|The xref:ROOT:component-name-and-version.adoc#version-key[version] of the component version as specified in _antora.yml_.
+|7.1
+
+|`page-module`
+|The xref:ROOT:module-directories.adoc#module[name of the page's module].
+|ROOT
+
+|`page-origin-branch`
+|The name of the repository branch where the page's source file is stored. (mutually exclusive with `page-origin-tag`)
+|v7.1.0
+
+|`page-origin-refname`
+|The name of the reference where the page's source file is stored.
+|v7.1.0
+
+|`page-origin-reftype`
+|The reference type (e.g., tag or branch) where the page's source file is stored.
+If the file was taken from a local directory (i.e., git worktree), the value is `(worktree)`.
+|branch
+
+|`page-origin-tag`
+|The name of the repository tag where the page's source file is stored. (mutually exclusive with `page-origin-branch`)
+|v7.1.0
+
+|`page-origin-start-path`
+|The start path of the content source where the page's source file is stored.
+|docs
+
+|`page-origin-type`
+|The type (e.g., git) of content source where the page's source file is stored.
+|git
+
+|`page-origin-url`
+|The URL, without credentials, of the content source where the page's source file is stored.
+|\https://gitlab.com/forest-co/silver-leaf.git
+
+|`page-origin-worktree`
+|Set (with no value) only if the file was taken from a local directory (i.e., a git worktree).
+|_Boolean attribute, no output is returned_
+
+|`page-relative-src-path`
+|The family-relative path of the page's source file (starting from [.path]_modules/<module>/pages_).
+|whats-new-in-spiky.adoc
+
+|`page-version`
+|Alias for `page-component-version`.
+|7.1
+|===
+
+Keep in mind that the AsciiDoc processor also assigns numerous intrinsic attributes to communicate information about the current document (e.g., `docname` and `docfilesuffix`), though these are not page attributes (meaning they are not prefixed with `page-`).
+
+=== Put intrinsic page attributes to work
+
+The value of these page attributes can be accessed in the AsciiDoc content using the attribute reference syntax (e.g., `\{page-component-name}`) or via the page UI model using a template variable (e.g., `page.attributes.component-name`).
+
+.Reference the current page's module name, component title, and version
+----
+This page belongs to the *{page-module}* module in the *{page-component-title} {page-component-version}* component version.
+----
+
+The attribute references in the above example output the data (shown below) for the current page, that is, the page you're reading right now.
+
+====
+This page belongs to the *{page-module}* module in the *{page-component-title} {page-component-version}* component version.
+====
+
+Since these are page attributes, they are promoted to the `page.attributes` map in the page UI model with all other page attributes.
+They can be accessed in a UI template using a property expression (e.g., `page.attributes.component-name`).
+
+To learn more about how page attributes work, see xref:page-attributes.adoc[].

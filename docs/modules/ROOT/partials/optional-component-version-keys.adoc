@@ -1,0 +1,29 @@
+[cols="1,5"]
+|===
+|Optional Key |Description
+
+|xref:component-attributes.adoc[asciidoc.attributes]
+|The `asciidoc` key accepts the `attributes` key and its nested list of key-value pairs.
+The key-value pairs listed under `attributes` represent built-in and user-defined xref:page:define-and-modify-attributes.adoc[AsciiDoc attributes] (e.g., `idseparator: '-'`) and xref:page:page-attributes.adoc[page attributes].
+Attributes in [.path]_antora.yml_ are applied to all of the xref:page:index.adoc[pages] and xref:page:resource-id.adoc[resources] (where applicable) that belong to a component version.
+
+|xref:component-display-version.adoc[display_version]
+|Version identifier used for presentation purposes only in the reference UI's component version selector and page version selector.
+`display_version` accepts empty spaces, uppercase letters, and most characters (e.g., `3.0 Beta`, `RED WREN!`).
+
+|xref:component-navigation.adoc[nav]
+|Accepts a list of navigation files.
+Navigation files (e.g., [.path]_nav.adoc_) that are registered under the `nav` key are used in the component version's page menu.
+
+|xref:component-prerelease.adoc[prerelease]
+|Designates a component version as a prerelease version and disables the default routing rules.
+Key can append a prerelease identifier (e.g., `-alpha.2`) to `version` without affecting the version coordinate or version URL segment.
+
+|xref:component-start-page.adoc[start_page]
+|Specifies a page as the component version's home page.
+By default, Antora uses [.path]_index.adoc_ in a component version's ROOT module.
+
+|xref:component-title.adoc[title]
+|Component name used for sorting and presentation purposes only in the reference UI's component version page menu, component version selector, and page breadcrumbs.
+Accepts empty spaces, uppercase letters, and a broad range of characters (e.g., `API Manager`).
+|===

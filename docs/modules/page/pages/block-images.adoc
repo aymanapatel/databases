@@ -1,0 +1,69 @@
+= Add Block Images
+
+On this page, you'll learn:
+
+* [x] The structure of the AsciiDoc block image macro.
+* [x] How to insert a block image using its resource ID.
+
+== AsciiDoc block image macro
+
+A block image is displayed as a discrete element on a site page.
+
+----
+This is a paragraph.
+
+image::resource-id[optional attribute,optional attribute]
+
+This is another paragraph.
+----
+
+On its own line, enter the image macro name and two colons (`image::`), followed by the resource ID of the xref:resource-id.adoc#target-resource[target resource file].
+To complete the macro, type a set of square brackets (`+[]+`) directly after the resource ID.
+You can specify a comma-separated list of attributes inside the square brackets or leave them empty.
+
+TIP: When referencing an image, you don't need to include the `image$` family coordinate in its resource ID.
+It's applied automatically at runtime when a resource ID is entered into an AsciiDoc image macro.
+
+[#insert-block-image]
+== Embed a block image
+
+The example below assumes that the image and page belong to the same component version and module.
+Only the xref:resource-id.adoc#id-resource[resource coordinate] of the xref:resource-id.adoc#target-resource[target resource file] needs to be entered in the resource ID when the xref:resource-id.adoc#current-page[current page] and target file belong to the same component version and module.
+
+. On a new line, enter the macro's name followed by two colons, `image::`.
+Make sure there is a blank line between the previous element, such as a paragraph or source block, and the line where you place the image macro.
++
+[subs=+quotes]
+----
+This is a paragraph.
+
+**image::**
+----
+
+. Enter the resource ID of the target image file directly after the two colons.
++
+[subs=+quotes]
+----
+image::**target-resource-filename.ext**
+----
+
+. Complete the macro with a set of square brackets (`+[]+`).
++
+[subs=+quotes]
+----
+image::target-resource-filename.ext**[]**
+----
+
+. Press kbd:[Enter] twice after the last square bracket (`]`) to insert a new line after the image macro.
++
+----
+This is a paragraph.
+
+image::target-resource-filename.ext[]
+
+This is another paragraph.
+----
+
+== Learn more
+
+To learn how to embed images that belong to other modules, docs components, and versions, see xref:image-resource-id-examples.adoc[Image resource ID examples].

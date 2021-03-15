@@ -1,0 +1,54 @@
+= Customize the Title
+
+The `title` key is used for xref:how-component-versions-are-sorted.adoc[sorting the versions by name] and for display purposes in the reference UI when a component name contains uppercase letters, symbols, or blank spaces.
+It doesn't affect page and resource IDs or the component name segment in the page URL.
+
+[#title-key]
+== title key
+
+The `title` key is optional.
+It's set in a component version's [.path]_antora.yml_ file and used by the reference UI where ever the component's name is displayed, including the xref:navigation:index.adoc#component-menu[component version page menu], xref:navigation:index.adoc#component-dropdown[component version selector], and first breadcrumb position on a component version's pages.
+
+If `title` isn't set, the reference UI uses the xref:component-name-and-version.adoc#name-key[value of name] instead.
+Unlike `name`, the value of `title` can contain empty spaces, uppercase letters, and a broader range of characters (e.g., `SUSE Manager`, `APIkit`).
+
+.antora.yml
+[source,yaml]
+----
+name: colorado
+title: Colorado ∆
+version: '5.6'
+----
+
+This key is useful when a project's name contains spaces or characters that break Antora's page and resource IDs, prevent portability between web servers, or aren't recommended in URLs.
+Also, if the name of your project changes, you can change the value of the `title` key but not have to update page and resource IDs or redirect URLs.
+
+[#assign-title]
+== Assign a title to a component version
+
+Let's expand on the [.path]_antora.yml_ example where you previously learned xref:component-name-and-version.adoc#assign-name-and-version[how to assign a component name and version].
+The project's official name is _Silver Leaf_, and the team wants this name to be displayed in the UI.
+Since `name` can't contain blank spaces, let's set `title` in the component version's [.path]_antora.yml_ file.
+
+. Open the component version's [.path]_antora.yml_ file in the text editor or IDE of your choice.
++
+.antora.yml for the component version silver-leaf 7.1
+[source,yaml]
+----
+name: silver-leaf
+version: '7.1'
+----
+
+. On a blank line, type `title`, directly followed by a colon (`:`).
+. Insert a blank space after the colon, and then type the value you want to assign to `title`.
++
+[source,yaml]
+----
+name: silver-leaf
+title: Silver Leaf
+version: '7.1'
+----
+
+. Save the file.
+
+Now, the UI will display _Silver Leaf_ in the component version page menu, component version selector, and page breadcrumbs.

@@ -1,0 +1,86 @@
+= Admonitions
+// URLs
+:url-adoc-manual: https://asciidoctor.org/docs/user-manual
+:url-admonition: {url-adoc-manual}/#admonition
+
+On this page, you'll learn:
+
+* [x] How to mark up an admonition with AsciiDoc.
+* [x] How to create an admonition with complex content.
+
+== Admonition styles
+
+An admonition, also known as a notice, helps draw attention to content with a special label or icon.
+
+Asciidoctor comes with five built-in admonition labels.
+
+* NOTE
+* TIP
+* IMPORTANT
+* CAUTION
+* WARNING
+
+== Basic admonition
+
+If the admonition content is not interrupted by blank lines, start the first line  with a style label.
+The label must be all uppercase and followed by a colon (`:`) and a single blank space.
+
+.Basic admonition syntax
+[source]
+----
+CAUTION: Don't stick forks in electric sockets.
+
+TIP: After someone sticks a fork in a socket, you'll need to reset the circuit in the breaker box in the dark and scary basement.
+
+WARNING: Never go into the basement.
+
+IMPORTANT: A monster lives in the basement.
+
+NOTE: If you go into the basement, see if you can find Kenny's parka.
+----
+
+CAUTION: Don't stick forks in electric sockets.
+
+TIP: After someone sticks a fork in a socket, you'll need to reset the circuit in the breaker box in the dark and scary basement.
+
+WARNING: Never go into the basement.
+
+IMPORTANT: A monster lives in the basement.
+
+NOTE: If you go into the basement, see if you can find Kenny's parka.
+
+[#complex]
+== Complex admonition
+
+If the admonition content includes elements separated by blank lines, place the content in a xref:examples.adoc#delimited[delimited example block] (`pass:[====]`).
+This behavior is referred to as masquerading.
+Place the appropriate label, in all uppercase, on the block in an attribute list (`[]`).
+
+.Complex admonition syntax
+[source]
+----
+[IMPORTANT]
+.Optional Title
+====
+Use an example block to create an admonition that contains complex content, such as (but not limited to):
+
+* Lists
+* Multiple paragraphs
+* Source code
+* Images
+====
+----
+
+[IMPORTANT]
+.Optional Title
+====
+Use an example block to create an admonition that contains complex content, such as (but not limited to):
+
+* Lists
+* Multiple paragraphs
+* Source code
+* Images
+====
+
+.*Asciidoctor resources*
+* {url-admonition}[Admonition paragraphs and blocks^]

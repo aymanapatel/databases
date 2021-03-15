@@ -1,0 +1,76 @@
+= Add a Title and Metadata
+:page-aliases: asciidoc:page-header.adoc
+// URLs
+:url-adoc-manual: https://asciidoctor.org/docs/user-manual
+:url-author: {url-adoc-manual}/#author-and-email
+
+On this page, you'll learn:
+
+* [x] How to add a page title.
+* [x] How to add metadata to a page.
+//* [x] How to structure a valid page header.
+
+[#page-title]
+== Page title
+
+A page title is specified by one equals sign (`=`), followed by one blank space, and then the text of the title.
+
+[source]
+----
+= Title of This Page
+----
+
+== Page description and keywords
+
+If set, `description` is output to an HTML `<meta>` tag with the same name.
+You can break long values across several lines by ending each line with a backslash `\` that is preceded by a space.
+
+.Description attribute syntax
+[source]
+----
+= Page Title
+:description: A description of the page stored in an HTML meta tag. This page is \
+about all kinds of interesting things.
+----
+
+The keywords attribute contains a list of comma-separated values that are assigned to an HTML `<meta>` tag with the same name.
+
+.Keywords attribute syntax
+[source]
+----
+= Page Title
+:keywords: comma-separated values, stored, in an HTML, meta, tag
+----
+
+== Page author
+
+Specifying the author or authors of a page is optional.
+The author is listed on the line directly beneath the page’s title.
+An optional email address or contact URL can follow an author’s name inside a set of angle brackets (`< >`).
+When a page has multiple authors, each author is separated by a semicolon (`;`).
+
+.Multiple authors and author information syntax
+[source]
+----
+= Page Title
+First Middle Last <author@email.com>; First Last <author@email.com>
+----
+
+Author names are output to the HTML `<meta>` tag.
+Whether any author information is also displayed on a published page depends on the site's UI templates.
+
+Refer to the Asciidoctor user manual for {url-author}[additional author attributes^] and methods for specifying author information.
+
+////
+[source]
+----
+= The Title of My New Page
+:attribute-a: value-a
+
+Welcome to my new page!
+
+== This is a section title
+
+This is a paragraph.
+----
+////

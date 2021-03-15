@@ -1,0 +1,39 @@
+= URLs Keys
+
+The playbook keys configured under `urls` manage the site's published URLs and redirects.
+
+[#urls-key]
+== urls key
+
+The global properties of your site's published URLs and redirect facility are defined under the `urls` key in a playbook file.
+
+[source,yaml]
+----
+urls: # <1>
+  html_extension_style: drop # <2>
+  redirect_facility: netlify # <3>
+----
+<1> Optional `urls` key
+<2> Optional `html_extension_style` key
+<3> Optional `redirect_facility` key
+
+These keys are optional; Antora will use their default values if they're not specified.
+The `html_extension_style` and `redirect_facility` keys can also be configured from the xref:cli:index.adoc[Antora CLI].
+
+[#urls-reference]
+== Available urls keys
+
+[cols="3,6,1"]
+|===
+|URLs Keys |Description |Required
+
+|xref:urls-html-extension-style.adoc[html_extension_style]
+|Specifies the user-facing URL extension used for HTML pages.
+Accepts the values `default`, `drop`, and `indexify`.
+|No
+
+|xref:urls-redirect-facility.adoc[redirect_facility]
+|Specifies whether Antora generates redirects either as static HTML refresh pages or redirect configuration files.
+Accepts the values `disabled`, `netlify`, `ngnix`, and `static`.
+|No
+|===

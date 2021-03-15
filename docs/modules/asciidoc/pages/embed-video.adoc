@@ -1,0 +1,48 @@
+= Embed a Video
+// URLs
+:url-adoc-manual: https://asciidoctor.org/docs/user-manual
+:url-video-formats: https://developer.mozilla.org/en-US/docs/Web/HTML/Supported_media_formats#Browser_compatibility
+:url-hosted-video: {url-adoc-manual}/#video
+:url-shared-video: {url-adoc-manual}/#youtube-and-vimeo-videos
+:url-video-attrs: {url-adoc-manual}/#supported-attributes
+
+On this page, you'll learn:
+
+//* [x] How to embed a video in a page.
+* [x] How to embed a YouTube or Vimeo video in a page.
+
+////
+== Add a video to a page
+
+You can embed self-hosted videos or videos shared on YouTube and Vimeo.
+
+Video format support is dictated by the user's browser and/or system.
+For a list of the web video formats each browser supports, see the {url-video-formats}[Mozilla Developer Supported Media Formats documentation^].
+
+.Embedded self-hosted video syntax
+----
+video::video-file.mp4[]
+----
+
+Let's break this down.
+You start with the video macro prefix, `video::`.
+Next is the target.
+Put the path of the video relative to the xref:ROOT:modules.adoc#videos-dir[video catalog] in that slot (no need for an attribute prefix).
+Finally, end with a pair of square brackets (`+[]+`).
+////
+
+== Add a YouTube or Vimeo video
+
+To embed a video hosted on YouTube or Vimeo, put the video's ID in the macro target and the name of the hosting service (`youtube`, `vimeo`) between the brackets.
+
+.Embedded Youtube video syntax
+----
+video::rPQoq7ThGAU[youtube]
+----
+
+TIP: Insert animated GIFs with the xref:page:images.adoc[image macro].
+
+.*Asciidoctor resources*
+* {url-hosted-video}[The AsciiDoc video macro^]
+* {url-shared-video}[Embed Youtube and Vimeo videos^]
+* {url-video-attrs}[Video macro options and attributes^]

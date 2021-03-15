@@ -1,0 +1,38 @@
+= Define a Component Version with No Version
+:listing-caption: Example
+:xrefstyle: short
+
+Sometimes the project or process your documenting isn't versioned.
+For example, hosted technology services and team handbooks may only need their content to represent how the service or process works right now.
+In these cases, you may prefer the component version's page URLs not contain the `version` value.
+This is where the special value `master` comes into play.
+
+NOTE: A repository branch named _master_ and a `version` key with a value of `master` aren't related.
+A repository branch can be a xref:playbook:configure-content-sources.adoc[content source specified in a playbook].
+The value of the `version` key is part of the identity of a xref:component-version.adoc[component version], and it's defined in xref:component-version-descriptor.adoc[an _antora.yml_ file].
+
+[#version-master]
+== Assign master as the version value
+
+Antora requires the xref:component-name-and-version.adoc#version-key[version key] be assigned a value in [.path]_antora.yml_.
+This value becomes the xref:page:page-id.adoc#id-coordinates[version coordinate] in the component version's page and xref:page:resource-id.adoc#id-coordinates[resource IDs].
+
+The value of `version` also becomes the version segment in the URL of its published pages.
+For example, if the value is  `2.1`, that value will appear in the URL of the component version's pages (e.g., [.path]_/component-name/2.1/page-name.html_).
+The exception to this rule is if `version` matches the reserved value `master`.
+Antora *does not* include the version segment in a component version's page URLs in this case.
+
+For instance, the component version defined in <<ex-unversioned>> will produce versionless URLs.
+
+[#ex-unversioned]
+.antora.yml for an unversioned component version
+[source,yaml]
+----
+name: tutorials
+version: master
+title: Tutorials
+display_version: Stable
+----
+
+A page with the filename [.path]_build-a-restful-web-service.adoc_ in this component version will have the URL [.path]_/tutorials/build-a-restful-web-service.html_.
+Also, you can still reference this docs component from other docs components using a fully qualified xref:page:page-id.adoc[page ID] or xref:page:resource-id.adoc[resource ID] (e.g., `master@tutorials::build-a-restful-web-service.adoc`).

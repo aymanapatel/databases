@@ -1,0 +1,68 @@
+= Page Xrefs and Link Text
+:page-aliases: link-syntax-and-content.adoc
+
+== Page xrefs
+
+Cross references in a navigation list are constructed using the xref:page:page-id.adoc#whats-a-cross-reference[AsciiDoc xref macro] and a xref:page:page-id.adoc[page ID].
+
+The xrefs in a navigation file's list most often target pages xref:organize-files.adoc[that belong to the same module as the navigation file].
+In these cases, the page IDs don't require the version, component, or module coordinates.
+However, regardless of what component version a navigation file belongs to, you can still link to any page in the site from any navigation list, whether they belong to a xref:page:module-and-page-xrefs.adoc#xref-page-across-modules[different modules] or xref:page:version-and-component-xrefs.adoc[components].
+
+.nav.adoc
+[source]
+----
+* xref:filename.adoc[Optional link text] <1>
+* xref:module:filename.adoc[] <2>
+* xref:version@component:module:filename.adoc[] <3>
+----
+<1> Xref targeting a page in the same module.
+The xref also specifies link text.
+<2> Page in the same component version, but a different module.
+<3> Page in another docs component.
+
+Xrefs in navigation files can use the target page's <<default-link-text,default navigation link text>> or have link text specified inside the macro's square brackets (`+[]+`).
+The link text is displayed in the component version's page menu.
+When a visitor clicks on the link text, they're routed to the target page specified by the page ID in the xref.
+The link text, regardless of whether it's the default link text or specified in the xref, is also displayed in the breadcrumbs at the top of the target page.
+
+[#default-link-text]
+== Use the default navigation link text
+
+Xrefs in a navigation file don't need to specify link text.
+
+.nav.adoc
+[source]
+----
+* xref:get-started.adoc[] <1>
+----
+<1> Xref that doesn't have any link text specified inside the macro's square brackets (`+[]+`).
+
+Antora uses the target page's default link text when the link text is unspecified.
+A page's default link text, when reference by a navigation file, is supplied by the xref:page:reftext-and-navtitle.adoc#navtitle[navtitle attribute].
+When `navtitle` isn't set in the target page's header, Antora automatically assigns it the value of the page's `reftext` attribute.
+
+NOTE: Antora doesn't populate an xref's link text when a xref:page:page-id.adoc#id-fragment[fragment is appended to the page ID].
+In such cases, you'll still need to explicitly specify the link text.
+
+== Specify link text in an xref
+
+You can enter link text directly in the xref macro and override the default link text supplied by the target page.
+
+.nav.adoc
+[source]
+----
+.The Special Project
+* xref:index.adoc[What's Silver Leaf] <1>
+** xref:ROOT:get-started.adoc#prereqs[Installation Prerequisites] <2>
+** xref:team::contributing.adoc[] <3>
+
+.Support
+* xref:help.adoc[*Troubleshooting*] <4>
+----
+<1> Enter the link text between the xref macro's square brackets (`+[]+`).
+<2> Xrefs where the target page ID is appended with a fragment should specify link text.
+<3> This xref will use the target page's default navigation link text.
+<4> Specified link text can be marked up with inline formatting syntax.
+
+The link text specified in the xref macros will be displayed in the component version page menu.

@@ -1,0 +1,21 @@
+= Add Links to External Sites
+
+A navigation list can contain links to external websites.
+External links are links to websites or materials that aren't built as part of your site's Antora pipeline.
+That is, the target doesn't belong to a component version.
+
+== External links
+
+Links to external websites and materials are created using the xref:asciidoc:external-urls.adoc#url-syntax[AsciiDoc URL syntax].
+AsciiDoc's URL syntax requires that the target have a valid URI scheme (e.g., `https://`) and address.
+
+[source]
+----
+* xref:get-started.adoc[]
+** xref:install.adoc[]
+* Support
+** https://external-website.com[Link text]
+** https://another-external-website.com
+----
+
+If you don't add a set of square brackets (`+[]+`) directly onto the end of the URL and insert link text, the raw URL will be displayed in the component version page menu when the site is generated.

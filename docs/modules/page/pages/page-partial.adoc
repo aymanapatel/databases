@@ -1,0 +1,45 @@
+= Unset page-partial Globally
+
+As Antora processes each page, it converts the contents of the file from AsciiDoc to HTML.
+(Within a component version, pages are typically processed in order by module and relative filename).
+The conversion of the contents from AsciiDoc to HTML would normally impact the behavior of the include directive.
+Specifically, a page that uses the include directive to include a page that has already been processed would see HTML instead of AsciiDoc.
+
+To rectify this ordering problem, Antora can retain the AsciiDoc source until all pages have been converted.
+This behavior is activated by setting the `page-partial` attribute in the document header of the page.
+As of Antora 2.2, the `page-partial` attribute is (soft) set globally by default.
+(Soft set means that it can still be overridden by the page).
+So, really, you don't even have to think of it.
+It will just work.
+
+The downside of retaining the AsciiDoc source is that it _may_ increase the peak heap usage of Antora for very large sites by ~ 10%.
+If that's a concern, you can revert to the previous "`a la carte`" behavior.
+To revert to the previous behavior (prior to Antora 2.2), set the following property in the playbook file:
+
+[source,yaml]
+----
+asciidoc:
+  attributes:
+    page-partial: false
+----
+
+The `page-partial` attribute will no longer be set globally.
+Now you *must* set the `page-partial` attribute on any page you want to use in an include directive.
+For example:
+
+[source]
+----
+= Shared Page
+:page-partial:
+
+Page contents.
+----
+
+With the `page-partial` attribute set, you can safely refer to that page using the include directive:
+
+[source]
+----
+\include::shared-page.adoc[]
+----
+
+Recall that the `page-partial` attribute in the included page instructs Antora to retain the AsciiDoc source until all pages have been converted.

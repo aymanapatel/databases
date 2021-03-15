@@ -1,0 +1,29 @@
+= Comments
+
+On this page, you'll learn:
+
+* [x] How write a comment line or block in an AsciiDoc file.
+
+== Comment syntax
+
+You can use a comment line or comment block when you want to add text to an AsciiDoc source file, but don't want that text to be displayed when the file is converted to an HTML page.
+
+A comment line is denoted by two consecutive forward slashes (`//`).
+
+.Comment line syntax
+[source]
+----
+// This is a line that is commented out.
+----
+
+A comment block is delimited by a set of four consecutive forward slashes (`////`).
+
+.Comment block syntax
+[source]
+----
+////
+This is a comment block.
+
+All of the text, including any AsciiDoc syntax, won't be visible when the file is converted to HTML.
+////
+----

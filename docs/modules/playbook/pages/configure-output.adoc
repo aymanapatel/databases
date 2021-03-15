@@ -1,0 +1,74 @@
+= Output Keys
+
+The playbook keys configured under `output` define where the site files are written and control how they're processed.
+
+[#output-key]
+== output key
+
+The `output` key contains common output settings and a list of destination specifications.
+
+.antora-playbook.yml
+[source,yaml]
+----
+output: # <1>
+  clean: true # <2>
+  dir: ./public # <3>
+  destinations: # <4>
+  - provider: archive # <5>
+    path: ./public/blue.zip # <6>
+----
+<1> Optional `output` key
+<2> Optional `clean` key
+<3> Optional `dir` key
+<4> Optional `destinations` key
+<5> Optional `provider` key
+<6> Optional `path` key
+
+The `output` key and the key-value pairs it can accept are optional.
+When `output` isn't set in a playbook, Antora uses the `fs` provider and publishes the site to the output directory [.path]_build/site_ by default.
+
+[#destinations-key]
+== destinations and provider keys
+
+The `output` key accepts the `destinations` key and its nested list of key-value pairs.
+The `destinations` key is required when you want to xref:output-provider-archive.adoc[publish the site files as an archive], use a xref:output-provider-custom.adoc[custom provider], or publish a site to xref:output-provider-fs.adoc#publish-to-multiple-destinations[multiple destinations].
+
+The `destinations` key accepts a list of specifications that tell Antora which provider(s) to use to publish the site and where the generated files should be saved.
+When `destinations` is set, one or more `provider` keys must be defined under it.
+
+A [.term]*provider* determines which transport protocol (local, SSH, HTTP, etc.) Antora should use when publishing the site and manages the low-level details of publication.
+Antora has two built-in providers, `fs` (filesystem) and `archive` (ZIP archive).
+`provider` is also an extension point that can be used to delegate to a custom provider, such as SSH, S3, etc.
+
+[#disable-publishing]
+=== Disable site publishing
+
+To disable publishing the site files entirely, including to the default output directory, set `destinations` to an empty array (`[]`).
+
+[#output-reference]
+== Available output keys
+
+[cols="3,6,1"]
+|===
+|Output Keys |Description |Required
+
+|xref:output-dir.adoc#clean-key[clean], xref:output-provider-fs.adoc#clean-key[destinations++[n]++.clean]
+|When set to `true`, the `clean` key removes the output directory or filesystem provider path recursively before generating the site.
+|No
+
+|destinations[n].path
+|Designates the target location where the output file(s) are written.
+See xref:output-provider-fs.adoc[Filesystem provider and path] and xref:output-provider-archive.adoc[Archive provider and path].
+|No
+
+|destinations[n].provider
+|Specifies the transport protocol Antora uses to publish the site.
+Accepts the built-in xref:output-provider-fs.adoc[fs] or xref:output-provider-archive.adoc[archive] values.
+xref:output-provider-custom.adoc[Custom providers] can also be specified.
+Multiple providers can be specified under `destinations`.
+|No
+
+|xref:output-dir.adoc[dir]
+|Specifies an output directory when the site is published using the default provider or first `fs` provider specified under `destinations`.
+|No
+|===

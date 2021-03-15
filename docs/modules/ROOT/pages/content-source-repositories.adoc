@@ -1,0 +1,30 @@
+= Repositories and Content Source Roots
+
+Antora collects content source files from directories in branches, tags, and worktrees of git repositories.
+These source files are only retrieved and processed correctly if Antora can locate them within a content source root.
+
+[#git-and-content-sources]
+== git repositories and content sources
+
+The source files containing a site's content are stored in one or more git repositories.
+These repositories can be remote, local, or a combination of both.
+In a playbook file, you'll enter several parameters (url, git references, and start paths) that 1. allow Antora to locate and connect to your content source repositories, and 2. provide Antora with the location criteria that resolves to one or more <<content-source-root,content source roots>> within a git repository.
+//A [.term]*content source* is one or more routes--git references and start paths--that lead to unique <<content-source-root,content source roots>>.
+//Content sources are specified in an Antora playbook file.
+
+Before configuring a site's playbook, you'll want to determine where to set up the content source roots in your repositories.
+// to be located and then set up the directories Antora requires.
+//to place your content source roots to beet up the required directories and sorted your content source files into them at each content source root.
+
+[#content-source-root]
+== What's a content source root?
+
+A [.term]*content source root* is a location in a branch or tag (i.e., a reference) of a repository from where Antora begins looking for content source files.
+Think of the content source root as the entrance of the store where Antora shops.
+From the content source root, Antora looks for an [.path]_antora.yml_ file, which identifies the component version basket, then scans for a collection of source files organized in a xref:standard-directories.adoc[standard set of directories] to add to that basket.
+
+A repository can have many content source roots.
+You may have one content source root per branch or tag.
+Or you may have multiple content source roots per branch or tag defined using xref:playbook:content-source-start-paths.adoc[multiple start paths].
+You can also have a combination of both.
+Where you store the content source roots is up to you.

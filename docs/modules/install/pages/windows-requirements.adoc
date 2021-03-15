@@ -1,0 +1,96 @@
+= Windows Requirements
+:url-choco: https://chocolatey.org
+:url-nvm-windows: https://github.com/coreybutler/nvm-windows
+
+On this page, you'll learn:
+
+* [x] How to install Chocolatey, the Windows package manager.
+* [x] How to install Node.
+
+If you've never installed Antora before, you'll need to complete the steps on this page before you can install Antora and use it to generate a documentation site.
+
+== Node
+
+We recommend using the latest long term support (LTS) release of Node.
+While you can use other versions of Node, Antora is only tested against {url-node-releases}[active LTS releases^].
+
+To see if you have Node installed, and which version, open PowerShell and type:
+
+ $ node --version
+
+You should see a version string, such as:
+
+[subs=attributes+]
+....
+v{version-node}
+....
+
+If *the command fails with an error*, you don't have Node installed.
+The best way to install Node on Windows is to use Chocolatey.
+If you don't have Chocolatey on your machine, go to <<install-choco,install Chocolatey>> to get it set up.
+Otherwise, skip directly to <<install-nvm,install nvm and Node>>.
+
+If *the command returns a version that isn't an active LTS version*, upgrade to the latest Node LTS version <<upgrade-node,using nvm>>.
+
+If *the command returns an active Node LTS version*, you're all set to xref:install-antora.adoc[install Antora].
+
+[#install-choco]
+== Install Chocolatey
+
+The best way to install the Node Version Manager (nvm) and Node is with {url-choco}[Chocolatey^], the package manager for Windows.
+
+. Open a PowerShell terminal and run it as an Administrator by right clicking on the PowerShell icon and selecting menu:Run as Administrator[].
+
+. Type the following command in the terminal:
+
+ $ Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+
+You're now ready to install nvm and Node.
+
+[#install-nvm]
+== Install nvm and Node
+
+. Open a PowerShell terminal, right click on the PowerShell icon, and select menu:Run as Administrator[].
++
+TIP: If you just installed Chocolatey using the instructions in the proceeding section, use the same terminal (running as Administrator) that you already have open.
+
+. To install the {url-nvm-windows}[Node Version Manager (nvm) for Windows^], enter the following command in the terminal:
+
+ $ choco install -y nvm
+
+. Close the terminal.
+
+. Open a new, regular PowerShell terminal, and install Node using nvm.
++
+--
+[subs=attributes+]
+ $ nvm install {version-node}
+
+IMPORTANT: When using nvm for Windows, you must enter an exact version of Node (e.g., `{version-node}`) until {url-nvm-windows}/issues/214[nvm-windows#214^] is resolved.
+--
+
+Now that Node is installed, you're ready to xref:install-antora.adoc[install Antora].
+
+.nvm and CI environments
+****
+You can install the LTS release of Node directly, without installing nvm, by entering the following command in the Administrator PowerShell:
+
+ $ choco install -y nodejs-lts
+
+However, many CI environments use nvm to install the Node version used for the build job.
+By using nvm, you closely align your setup with the environment used to generate and publish your production site.
+****
+
+[#upgrade-node]
+== Upgrade Node using nvm
+
+If you have nvm installed but your Node version is not an LTS release, type the following command in your terminal:
+
+[subs=attributes+]
+ $ nvm install {version-node}
+
+IMPORTANT: When using nvm for Windows, you must enter the full version of Node (i.e., `nvm install {version-node}`).
+
+== Learn more
+
+Once you've installed Node, you're ready to xref:install-antora.adoc[install Antora].

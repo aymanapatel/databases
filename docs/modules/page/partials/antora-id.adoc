@@ -1,0 +1,44 @@
+//:family: page
+//:family: resource
+//:colon: :
+
+// tag::id[]
+[#id-version]
+version@::
+The first coordinate identifies the version of the component to which the target {family} belongs.
+The version is specified by the xref:ROOT:component-name-and-version.adoc#version-key[version key] in the [.path]_antora.yml_ file that defines the {family}'s component version.
+The version coordinate is directly followed by an at sign (`@`).
+
+[#id-component]
+component{colon}::
+The second coordinate identifies the name of the component to which the target {family} belongs.
+The component name is specified by the xref:ROOT:component-name-and-version.adoc#name-key[name key] in the [.path]_antora.yml_ file that defines the {family}'s component version.
+The component name is directly followed by one colon (`:`).
+
+[#id-module]
+module{colon}::
+The third coordinate identifies the name of the module to which the target {family} belongs.
+The module name is derived from the xref:ROOT:module-directories.adoc#module[module directory] where the {family} is stored.
+The module name is directly followed by one colon (`:`).
+
+// tag::resource[]
+[#id-family]
+family$::
+The fourth coordinate identifies the name of the family to which the target {family} belongs.
+The family is derived from the xref:ROOT:family-directories.adoc[family directory] where the {family} is stored.
+Remove the "`s`" at the end of the family's name and replace it with a dollar sign (`$`) when constructing a resource ID.
+Whether or not the family coordinate needs to be specified xref:page:resource-id.adoc#requires-family-coordinate[depends on the AsciiDoc syntax used to reference the resource].
+
+[#id-resource]
+resource.ext::
+The fifth coordinate specifies the path, relative to the xref:ROOT:family-directories.adoc[family directory], of the target resource's source file.
+The filename must include the file extension.
+// end::resource[]
+
+// tag::page[]
+[#id-page]
+page.adoc::
+The fourth coordinate specifies the path, relative to the xref:ROOT:pages-directory.adoc[_pages_ family directory], of the target page's source file.
+The filename must include the _.adoc_ file extension.
+// end::page[]
+// end::id[]

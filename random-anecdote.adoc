@@ -1,8 +1,0 @@
-Random Anecdote
-:toc:
-
-
-
-1. **Data reconsiliation** using *Merkle Trees* in ***DynamoDB, Cassandra or Blockchain***
-
-

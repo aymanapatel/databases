@@ -1,0 +1,65 @@
+= Publish to GitHub Pages
+:listing-caption!:
+
+Antora is designed to create sites that run anywhere, whether it be on a static web host or the local filesystem.
+However, some hosts offer "`features`" that mess with Antora's output.
+GitHub Pages is one of those hosts.
+
+== Jekyll and underscore files
+
+By default, GitHub Pages runs all files through another static site generator named Jekyll (even if your repository is not set up to use Jekyll).
+Since Antora already produces a ready-made site, there's absolutely no need for this step.
+But it's more than just the wasted effort.
+
+Jekyll has the nasty side effect of removing all files that begin with an underscore (`+_+`).
+Why is this a problem?
+By default, Antora puts UI files in a folder named `+_+`.
+It also places images inside the folder named `+_images+`.
+When Jekyll comes through, it wipes out these folders.
+As a result, you get no UI and no images.
+
+== .nojekyll
+
+Fortunately, there's a way to disable this "`feature`" of GitHub Pages.
+The solution is to add a [.path]_.nojekyll_ file to the root of the published site (i.e., the output directory configured in your playbook).
+
+The presence of the [.path]_.nojekyll_ file at the root of the `gh-pages` branch tells GitHub Pages not to run the published files through Jekyll.
+The result is that your Antora-made site will work as expected.
+
+Let's look at two ways to create the [.path]_.nojekyll_ file when you run Antora.
+
+=== Touch the file manually
+
+One way to add this file is to touch the [.path]_.nojekyll_ file in the output directory after Antora runs, but before committing the files to GitHub Pages.
+For example:
+
+ $ touch build/site/.nojekyll
+
+Fortunately, there's way to do this without having to run a separate command.
+
+=== Use the supplemental UI
+
+To avoid the need for the extra command, the other way to do it is to inject the file using Antora's supplemental UI feature.
+To do so, add the following `supplemental_files` block under the `ui` category in your playbook file:
+
+.antora-playbook.yml
+[source,yaml]
+----
+ui:
+  bundle:
+    url: <url-of-bundle-goes-here>
+  supplemental_files:
+  - path: ui.yml
+    contents: |
+      static_files: [ .nojekyll ]
+  - path: .nojekyll
+----
+
+This configuration defines files from memory.
+The first file, [.path]_ui.yml_, tells Antora which files to promote to the root of the site (outside the UI folder) using the `static_files` key.
+The second file, [.path]_.nojekyll_, writes to the root of the published site.
+Since the `contents` key is absent, Antora will create an empty file (the equivalent of the `touch` command from above).
+
+CAUTION: The solution to use the supplemental UI to create the [.path]_.nojekyll_ file at the root of the published site will not work if you configure Antora to read the supplemental UI from a local directory.
+That's because, in this case, Antora ignores files that begin with a dot (such as [.path]_.nojekyll_), and thus won't pick them up.
+Follow https://gitlab.com/antora/antora/-/issues/627[issue #627] to track the status of this bug.

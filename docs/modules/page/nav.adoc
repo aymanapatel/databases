@@ -1,0 +1,32 @@
+.Create & Manage Pages
+* xref:index.adoc[]
+* xref:standard-page.adoc[]
+* xref:title-and-metadata.adoc[]
+* xref:attributes.adoc[]
+** xref:define-and-modify-attributes.adoc[]
+** xref:page-attributes.adoc[]
+** xref:intrinsic-attributes.adoc[]
+* xref:start-page.adoc[]
+* xref:page-id.adoc[]
+** xref:module-and-page-xrefs.adoc[]
+** xref:version-and-component-xrefs.adoc[]
+//Rename, Move, and Delete Pages
+* xref:reftext-and-navtitle.adoc[]
+* xref:page-aliases.adoc[]
+* xref:page-layout.adoc[]
+
+.Create & Manage Resources
+* xref:resource-id.adoc[]
+* xref:partials-and-content-snippets.adoc[]
+** xref:create-a-partial.adoc[]
+** xref:include-a-partial.adoc[]
+* xref:examples-and-source-snippets.adoc[]
+** xref:include-an-example.adoc[]
+* xref:images.adoc[]
+** xref:block-images.adoc[]
+** xref:inline-images.adoc[]
+** xref:image-resource-id-examples.adoc[]
+* xref:asciidoc:link-attachment.adoc[]
+// Pages as Resources
+* xref:include-a-page.adoc[]
+** xref:page-partial.adoc[]

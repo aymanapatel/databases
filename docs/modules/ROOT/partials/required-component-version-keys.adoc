@@ -1,0 +1,12 @@
+[cols="1,5"]
+|===
+|Required Key |Description
+
+|xref:component-name-and-version.adoc#name-key[name]
+|Component name used with `version` to identify a component version.
+Used as the component coordinate in page and resource IDs and in the component URL segment for a component version's published pages.
+
+|xref:component-name-and-version.adoc#version-key[version]
+|Version identifier used with `name` to identify a component version.
+Used as the version coordinate in page and resource IDs and, with the exception of the reserved value `master`, in the version URL segment for a component version's published pages.
+|===

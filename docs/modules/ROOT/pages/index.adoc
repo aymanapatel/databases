@@ -1,0 +1,88 @@
+= Antora Documentation
+:keywords: Docs as Code, DocOps, content management system, docs writers, publish software documentation, CI and docs, CD and docs
+
+[discrete.tagline]
+=== The Static Site Generator for Tech Writers
+
+This site hosts the technical documentation for Antora.
+Antora makes it easy for tech writers to create documentation and publish it to the web.
+As a tech writer, you focus on authoring content in xref:asciidoc:asciidoc.adoc[AsciiDoc], Antora's content markup language.
+You organize those files into a standard project structure and store them in one or more content (git) repositories.
+Antora picks up your content from there and transforms it into a website.
+That's all there is to it!
+
+////
+== Generator pipeline
+
+Antora's site generator pipeline is a complete end-to-end solution for publishing.
+While it can be extended, no additional scripts are needed.
+
+Antora's generator pipeline kicks off by aggregating files from a variety of sources.
+Currently, these sources can be branches of one or more git repositories and a UI bundle.
+
+//NOTE: By leveraging Antora's open architecture, you can incorporate just about any other type of content too.
+
+Next, Antora organizes the files into catalogs.
+It then uses Asciidoctor to convert all content files to embeddable HTML and resolve links between pages.
+
+Once conversion is complete, Antora passes the embeddable HTML as part of a UI data model to Handlebars templates provided by the UI bundle to create the web pages.
+
+Finally, it publishes the pages and supporting content and UI assets to one or more local or remote destinations, where they can be viewed as a website.
+
+Antora's built-in orchestration makes it very CI-friendly.
+All the CI job has to do is prepare the environment and launch a single command, and out comes your site!
+////
+
+== Manage docs as code
+
+With Antora, you manage *docs as code*.
+That means your documentation process benefits from the same practices used to produce successful software.
+
+Some of these practices include:
+
+* Storing content in a version control system.
+* Separating content, configuration, and presentation.
+* Leveraging automation for compilation, validation, verification, and publishing.
+* Reusing shared materials (DRY).
+
+Antora helps you incorporate these practices into your documentation workflow.
+As a result, your documentation is much easier to manage, maintain, and enhance.
+
+////
+//== Content is sovereign
+== Documentation as Code
+
+While it's considered a best practice to split source code into discrete, well-defined modules, documentation for that code often gets lumped into one massive "`book`".
+This situation has brought many documentation projects to a grinding halt.
+
+By treating *docs as code*, the documentation process can benefit from the best practices that produce successful software.
+Antora helps you incorporate these practices into your documentation workflow.
+
+Antora favors a modular approach to managing documentation.
+It consists of a playbook, content repositories, a UI bundle, and the site generator pipeline, all of which are discrete parts.
+//The playbook controls how Antora generates and publishes your site, but it does not own any content itself.
+
+The separation of these domains keeps the configuration separate from content.
+The content repositories just contain content.
+They can be enlisted, per branch, into the site generation process.
+
+This strategy makes it possible for content branches to be reused, substituted, deactivated, or archived.
+This is a sharp contrast to many other site generators that intermix all of these concerns, making the documentation difficult to manage, maintain, and enhance.
+////
+
+== Where to begin
+
+If you're just beginning your journey with Antora, you'll probably want to know xref:features.adoc[how Antora can help you].
+When you are familiar with the basic concepts, you can try out Antora using the xref:install-and-run-quickstart.adoc[Antora quickstart guide].
+
+If you're ready to set up a new documentation project, or you want to migrate an existing project to Antora, start by xref:organize-content-files.adoc[organizing your documentation files] into the project structure Antora expects.
+You'll then need to xref:playbook:index.adoc[create a playbook] to tell Antora where to find the documentation and UI to use for your site.
+
+If you already have a documentation component set up, and you're ready to create your first site, check that you've met Antora's xref:install:supported-platforms.adoc[system requirements], then xref:install:install-antora.adoc[install Antora], and finally xref:run-antora.adoc[generate your site] using the `antora` command.
+
+If you want to jump into writing, learn how to use the AsciiDoc syntax to xref:page:index.adoc[make documentation pages].
+
+If you want to dive deeper into the details of the site generator pipeline, check out xref:how-antora-works.adoc[how Antora works].
+
+We hope you find making documentation sites with Antora enjoyable and rewarding.
+Happy writing!

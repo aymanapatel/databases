@@ -1,0 +1,62 @@
+= How to Organize Your Content Files
+
+Antora employs both convention and configuration to aggregate content and generate your site.
+Before you begin setting up or migrating your repositories, let's review some key concepts that could impact how you organize your documentation projects and content files to work with Antora.
+
+== Storing your content source files
+
+Antora can retrieve content source files from numerous git repositories, which means searching for files under a xref:playbook:content-source-start-path.adoc[start path] (or xref:playbook:content-source-start-paths.adoc[multiple start paths]) in branches, tags, and/or the local worktree.
+The repositories Antora uses don't have to be reserved exclusively for storing documentation (hence the start path).
+Antora relies on both xref:standard-directories.adoc[convention] and xref:playbook:configure-content-sources.adoc[configuration] to identify the documentation content.
+Antora can retrieve files from repositories that also host application code, tests, and other materials in sibling hierarchies.
+
+In order to fetch source files from multiple and multi-use repositories, Antora requires that the documentation files be:
+
+* Located under a xref:content-source-repositories.adoc[content source root]
+* Labeled with a file named xref:component-version-descriptor.adoc[_antora.yml_]
+* Organized into a xref:standard-directories.adoc[standard set of directories]
+
+== Classifying your content source files
+
+Once Antora collects the source files from all content source roots, it classifies each file by assigning metadata to it, which is used to uniquely identify the file within the site.
+The file's identifier (i.e., resource ID) is used for creating references from pages and the configuration.
+This step also implicitly partitions the source files into component versions.
+
+=== Antora's virtual filesystem
+
+Antora decouples source files from their storage locations after it collects them.
+For all intents and purposes, the origin of each file is irrelevant.
+In other words, Antora never goes back to the filesystem or git repository to read the file once it's discovered and loaded.
+Antora bases all of its file operations on this virtual filesystem (VFS) it creates after it collects the files.
+
+The only aspect of a file that maps back to the location on the filesystem is the family-relative path.
+And even this association is maintained merely as a convenience for the author.
+Aside from the family-relative path, all other parts of the file's identity are based on associative metadata (i.e., the component name, version, module name, and family).
+
+=== File metadata
+
+So how does a file get this metadata?
+All files in the same content source root inherit the component name and version from the component version descriptor file, named _antora.yml_.
+These descriptor files help Antora sort and organize all of the collected source files into component versions.
+You can think of a component version as all of the documentation for a version of a project.
+For example, you're reading a page in the {page-component-title} {page-component-display-version} component version right now.
+
+These _antora.yml_ files are how content that belongs to the same version of a project can be identified by Antora.
+It's also how component versions are defined and populated implicitly.
+//and authors alike, cataloged, referenced by other pages and navigation in the site or externally, and published to the appropriate location in the site.
+
+Inside a content source root, files are further grouped into module and family folders, which provide two more facets of a source file's identity.
+Finally, the family-relative path is captured to uniquely identify a source file within a family, even across multiple repositories and/or references.
+
+=== File locations and URLs
+
+The location of a source file also doesn't dictate the location of the published file.
+Once a source file is loaded into memory, its metadata gets manipulated, which includes computing the output location and URL by which it can be accessed.
+Each family of files has different rules for how these values are computed.
+This means the association between where the source file is found and where the published file gets placed in the site or how that file is accessed isn't hardwired.
+
+//That means the names and URLs of the repositories, branches, tags, and content source roots doesn't have any bearing on a site that's generated from these files.
+//
+//Except for the relative path of files stored in the family directories, the source files`' storage locations don't impact how they're referenced internally, organized, labeled, and versioned in the published site, or even how their resulting page URLs are constructed when the site is being generated.
+
+See xref:component-version.adoc[What's a component version?] and xref:component-version-descriptor.adoc[What's antora.yml?] to learn how to assign a component name, version and other optional information to groups of content source files.

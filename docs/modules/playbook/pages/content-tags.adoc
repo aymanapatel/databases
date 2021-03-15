@@ -1,0 +1,83 @@
+= Tags
+
+The `tags` key accepts a list of exact tag names and shell glob patterns.
+
+[#tags-key]
+== tags key
+
+The `tags` key is optional and can be specified directly on the `content` key or on a `url` key.
+It accepts a list of tag name patterns.
+The values can be the exact names of tags, shell glob patterns such as `v2.*`, or a combination of exact names and glob patterns.
+
+.antora-playbook.yml
+[source,yaml]
+----
+content:
+  sources:
+  - url: https://git-service.com/org/repo-z.git
+    tags: [90.0, 93.0] # <1>
+  - url: https://git-service.com/org/repo-x.git
+    tags: [95.0, releases/*, !v1.*] # <2>
+    branches: ~ # <3>
+----
+<1> Enclose multiple values in a set of square brackets (`+[]+`).
+Separate each value with a comma (`,`).
+<2> Exact tag names and glob patterns can be assigned to a `tags` key.
+<3> Disable the default branches filter by setting `branches` and assigning it the tilde (`~`) value.
+
+WARNING: Setting the `tags` key does not automatically disable the xref:content-branches.adoc#default[default branches filter]!
+
+These value patterns are case insensitive (i.e., the characters are matched regardless of case).
+The values can be specified in a comma-separated list or as xref:content-branches.adoc#ex-value-list[single items on individual lines].
+
+[#add-default-tags-filter]
+== Add a default tags filter
+
+The `tags` key isn't used by default (unlike the `branches` key and its default filter).
+To apply the same tag filter to all the `url` entries that don't declare the a `tags` key explicitly, specify a `tags` key directly on the `content` key.
+
+.Assign a default tags filter
+[source,yaml]
+----
+content:
+  tags: v* # <1>
+  branches: ~ # <2>
+  sources:
+  - url: https://git-service.com/org/repo-z.git # <3>
+  - url: https://git-service.com/org/repo-x.git
+    tags: [v*, !v1.*] # <4>
+  - url: https://git-service.com/org/repo-y.git # <5>
+----
+<1> Specify `tags` under the `content` key to create a default tags filter.
+<2> Disable the default branches filter on all `url` keys.
+<3> This `url` will use the default tags filter.
+<4> The value assigned to this `tags` key will be applied to the `url` it's specified on, overriding the default tags filter.
+<5> This `url` will use the default tags filter.
+
+With the creation of the default tags filter, Antora will now discover and use tags that begin with the letter `v` for all content sources that don't explicitly declare a `tags` key.
+
+[#mix-branches-and-tags]
+== Use tags and branches from the same repository
+
+In this example, we'll load the `master` branch of a content repository as well as all of the tags starting with the letter `v`.
+
+[source,yaml]
+----
+content:
+  sources:
+  - url: https://git-service.com/org/repo-x.git
+    branches: [master, sneaky-chinchilla]
+    tags: v*
+----
+
+////
+.Assign a default tags filter
+[source,yaml]
+----
+content:
+  tags: v*
+  sources:
+  - url: https://gitlab.com/antora/demo/demo-component-a.git
+  - url: https://gitlab.com/antora/demo/demo-component-b.git
+----
+////

@@ -1,0 +1,13 @@
+.Configure Component Versions
+* xref:component-version.adoc[]
+* xref:component-version-descriptor.adoc[]
+* xref:component-name-and-version.adoc[]
+* xref:component-title.adoc[]
+* xref:component-display-version.adoc[]
+* xref:component-prerelease.adoc[]
+* xref:component-with-no-version.adoc[]
+* xref:component-attributes.adoc[]
+* xref:component-start-page.adoc[]
+* xref:component-navigation.adoc[]
+* xref:how-component-versions-are-sorted.adoc[]
+* xref:distributed-component-version.adoc[]

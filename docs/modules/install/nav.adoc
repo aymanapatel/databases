@@ -1,0 +1,7 @@
+.Get Antora
+* xref:linux-requirements.adoc[]
+* xref:macos-requirements.adoc[]
+* xref:windows-requirements.adoc[]
+* xref:install-antora.adoc[]
+* xref:upgrade-antora.adoc[]
+* xref:supported-platforms.adoc[]

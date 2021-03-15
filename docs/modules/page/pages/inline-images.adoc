@@ -1,0 +1,60 @@
+= Add Inline Images
+
+On this page, you'll learn:
+
+* [x] The structure of the AsciiDoc inline image macro.
+* [x] How to insert an inline image using its resource ID.
+
+== AsciiDoc inline image macro
+
+An inline image is displayed in the flow of another element, such as a paragraph or sidebar block.
+The inline image macro is almost identical to the block image macro, except its macro name is followed by a single colon (`:`).
+
+----
+Here's an inline image:resource-id[optional attribute,optional attribute] image.
+----
+
+In the flow of an element, enter the image macro name and a single colon (`+image:+`), followed by the resource ID of the xref:page:resource-id.adoc#target-resource[target resource file].
+To complete the macro, type a set of square brackets (`+[]+`) directly after the resource ID.
+You can specify a comma-separated list of optional attributes inside the square brackets or leave them empty.
+
+TIP: When referencing an image, you don't need to include the `image$` family coordinate in its resource ID.
+It's applied automatically at runtime when a resource ID is entered into an AsciiDoc image macro.
+
+[#insert-inline-image]
+== Embed an inline image
+
+The example below assumes that the image and page belong to the same component version and module.
+Only the xref:resource-id.adoc#id-resource[resource coordinate] of the xref:resource-id.adoc#target-resource[target resource file] needs to be entered in the resource ID when the xref:resource-id.adoc#current-page[current page] and target resource belong to the same component version and module.
+
+. At the location in a line where you want to place the image, enter the macro's name followed by one colon (`+image:+`).
++
+[subs=+quotes]
+----
+Here's an inline *image:*
+----
+
+. Enter the resource ID of the target image file directly after the colon.
++
+[subs=+quotes]
+----
+Here's an inline image:**target-resource-filename.ext**
+----
+
+. Complete the macro with a set of square brackets (`+[]+`).
++
+[subs=+quotes]
+----
+Here's an inline image:target-resource-filename.ext**[]**
+----
+
+. Press the kbd:[SPACE] bar once after the last square bracket (`]`) to insert a space after the macro, then continue entering your content.
++
+[subs=+quotes]
+----
+Here's an inline image:target-resource-filename.ext[] image.
+----
+
+== Learn more
+
+To learn how to embed images that belong to other modules, docs components, and versions, see xref:image-resource-id-examples.adoc[Image resource ID examples].

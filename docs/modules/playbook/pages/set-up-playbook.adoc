@@ -1,0 +1,270 @@
+= Set Up a Playbook
+:page-aliases: playbook-schema.adoc
+
+Let's create a basic playbook file.
+The steps in the following sections will walk you through setting up a playbook that configures a site title and URL, fetches source files from the Demo Component A and Demo Component B repositories, and applies Antora's reference UI to the converted pages.
+
+== Configure your site's properties
+
+First, let's configure your site's title and URL.
+
+. Open a new file in the text editor or IDE of your choice.
+. On the first line, type `site:` and
+press kbd:[Enter] to go to the next line.
++
+--
+[source,yaml]
+----
+site:
+----
+
+The xref:configure-site.adoc[site key] accepts a map of key-value pairs that define global site properties.
+--
+
+. The xref:site-title.adoc[title key] is a child of `site`.
+Type `++title: ++` and then the text that will become the title of your site.
+Press kbd:[Enter].
++
+[source,yaml]
+----
+site:
+  title: My Demo Site
+----
+
+. Type `++url: ++` and then the base URL of your site.
++
+--
+[source,yaml]
+----
+site:
+  title: My Demo Site
+  url: https://docs.demo.com
+----
+
+Assigning an xref:site-url.adoc[absolute URL to the url key] activates secondary features such as the sitemap.
+--
+
+. On the next line, enter `++start_page: ++` and the page ID of the page Antora should use as the site's home page.
++
+--
+[source,yaml]
+----
+site:
+  title: My Demo Site
+  url: https://docs.demo.com
+  start_page: component-b::index.adoc
+----
+
+The xref:site-start-page.adoc[start_page value] in the example above is the page ID for the latest version of the file [.path]_index.adoc_ that belongs to _Component B_.
+In order for Antora to use this page, you need to tell Antora where to find the source files that belong to Component B.
+--
+
+In the next section, let's define the content sources URLs, branches, and start paths.
+
+== Configure your site's content sources
+
+Antora needs to know what git repositories, branches, and tags it should locate and fetch source files from, as well as the location of any content source roots that aren't at the root of a repository.
+Let's define these keys in the playbook file you started in the previous section.
+
+. Type `content:` flush against the left side of the file.
+Press kbd:[Enter] to go to the next line.
++
+[source,yaml]
+----
+# ...
+  start_page: component-b::index.adoc
+content:
+----
+
+. The `sources` key is a child of `content`.
+Type `sources:` and press kbd:[Enter].
++
+--
+[source,yaml]
+----
+# ...
+  start_page: component-b::index.adoc
+content:
+  sources:
+----
+
+The xref:configure-content-sources.adoc#sources-key[sources key] requires at least one `url` key be assigned a xref:content-source-url.adoc[remote repository URL or filesystem path].
+Let's assign the URL for a remote repository named _Demo Component A_ to `url` in the next step.
+--
+
+. Type a hyphen (`-`) followed by a blank space.
+Then type `++url: ++` and the URL of a content source repository.
++
+--
+[source,yaml]
+----
+# ...
+  start_page: component-b::index.adoc
+content:
+  sources:
+  - url: https://gitlab.com/antora/demo/demo-component-a.git
+----
+
+Now, Antora can locate the _Demo Component A_ repository.
+But it also needs to know what branches and tags it should fetch.
+
+The xref:content-branches.adoc#default[default branches filter] is applied at runtime when a `url` key doesn't have a `branches` or `tags` key set on it.
+Since the _Demo Component A_ repository only has one branch, and that branch's name (`master`) falls within the parameters of the default filter, you don't need to explicitly set `branches` on this `url` key.
+--
+
+. Let's add the URL for the _Demo Component B_ repository.
+On a new line, type `++- url: ++` and the repository's URL.
++
+--
+[source,yaml]
+----
+# ...
+  start_page: component-b::index.adoc
+content:
+  sources:
+  - url: https://gitlab.com/antora/demo/demo-component-a.git
+  - url: https://gitlab.com/antora/demo/demo-component-b.git
+----
+
+The _Demo Component B_ repository uses branches for versioning.
+The content source files in the branches `v1.0` and `v2.0` are ready for publishing.
+However, you can't use the xref:content-branches.adoc#default[default branches filter] on this `url` because the files in the `master` branch shouldn't be published to the site.
+Instead, you'll have to tell Antora what branches it should fetch from the _Demo Component B_ repository.
+--
+
+. On the next line, type `++branches: ++` and an opening square bracket (`+[+`).
+Inside the `+[+`, type each branch name that Antora should fetch.
+Separate the values with commas.
+It doesn't matter what order you list the branch names.
+At the end of the list, type a closing square bracket (`+]+`).
+Press kbd:[Enter].
++
+--
+[source,yaml]
+----
+# ...
+  start_page: component-b::index.adoc
+content:
+  sources:
+  - url: https://gitlab.com/antora/demo/demo-component-a.git
+  - url: https://gitlab.com/antora/demo/demo-component-b.git
+    branches: [v2.0, v1.0]
+----
+
+Make sure to indent `branches` enough so the _u_ in `url` and _b_ in `branches` are lined up.
+
+TIP: The `branches` key also accepts shell glob patterns.
+For instance, you could define `branches: v*` on the `url` key for _Demo Component B_ to specify that Antora fetch the branches with the names `v1.0` and `v2.0`.
+
+You're not done configuring the keys for the _Demo Component B_ repository just yet.
+The xref:ROOT:content-source-repositories.adoc#content-source-root[content source root] in each branch isn't at the root of the repository, https://gitlab.com/antora/demo/demo-component-b/-/tree/master/docs[it's at _docs_].
+You'll need to set the `start_path` key on `url` so Antora can locate the content source root.
+--
+
+. Type `++start_path: ++` and the repository root relative path.
++
+--
+[source,yaml]
+----
+# ...
+  start_page: component-b::index.adoc
+content:
+  sources:
+  - url: https://gitlab.com/antora/demo/demo-component-a.git
+  - url: https://gitlab.com/antora/demo/demo-component-b.git
+    branches: [v2.0, v1.0]
+    start_path: docs
+----
+
+Don't add leading or trailing slashes to the path.
+--
+
+Now, you're ready to configure the final set of required keys that will tell Antora what UI it should apply to the site.
+
+== Configure your site's UI bundle
+
+Antora needs a xref:ui-bundle-url.adoc[UI bundle] in order to generate a site.
+Let's tell Antora to use it's reference UI bundle by defining the required keys in the playbook file you worked on in the previous sections.
+
+. Flush against the left side of the file, type `ui:`.
+Press kbd:[Enter] to go to the next line.
++
+[source,yaml]
+----
+# ...
+    start_path: docs
+ui:
+----
+
+. The `bundle` key is a child of `ui`.
+Type `bundle:` and press kbd:[Enter].
++
+[source,yaml]
+----
+# ...
+    start_path: docs
+ui:
+  bundle:
+----
+
+. The `url` key is a child of `bundle`.
+Type `++url: ++` and then the URL of Antora's reference UI bundle.
++
+--
+[source,yaml]
+----
+# ...
+    start_path: docs
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/master/raw/build/ui-bundle.zip?job=bundle-stable
+----
+
+Antora's reference UI archive changes over time, but its URL doesn't, so you need to activate the xref:ui-bundle-url.adoc#snapshot[snapshot key].
+--
+
+. On the next line, enter `++snapshot: ++` and the value `true`.
++
+--
+[source,yaml]
+----
+# ...
+    start_path: docs
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/master/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true
+----
+
+When `snapshot` is set to `true`, Antora will download the UI bundle whenever xref:runtime-fetch.adoc[fetch] is activated in the playbook or from the CLI.
+--
+
+You're almost done!
+Here's the entire playbook file you've assembled so far.
+
+[source,yaml]
+----
+site:
+  title: My Demo Site
+  url: https://docs.demo.com
+  start_page: component-b::index.adoc
+content:
+  sources:
+  - url: https://gitlab.com/antora/demo/demo-component-a.git
+  - url: https://gitlab.com/antora/demo/demo-component-b.git
+    branches: [v2.0, v1.0]
+    start_path: docs
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/master/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true
+----
+
+This playbook will generate a site named _My Demo Site_ using the content files from the specified repository branches and the UI files from the specified UI bundle.
+
+All you've got to do before running Antora on this playbook is save it.
+Playbook files are often saved with the filename [.path]_antora-playbook.yml_ or a related filename, such as [.path]_local-antora-playbook.yml_, depending on the context in which it's used.
+
+Once you've saved the playbook file, you're ready to xref:ROOT:run-antora.adoc[run Antora].
+
+TIP: You can also get this playbook from the https://gitlab.com/antora/demo/docs-site[Demo Docs Site repository].

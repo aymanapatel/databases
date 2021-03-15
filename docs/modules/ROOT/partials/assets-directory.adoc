@@ -1,0 +1,24 @@
+[#assets-dir]
+.Assets
+****
+A module directory can also contain a directory named [.path]_assets_.
+This is an alternate location, recognized by Antora, where the [.path]_attachments_ and [.path]_images_ family directories can be placed.
+
+----
+📒 repository
+  📄 antora.yml
+  📂 modules
+    📂 ROOT
+      📂 assets
+        📂 attachments
+          📄 a-source-file.zip
+        📂 images
+          📄 a-source-file.png
+      📂 pages
+        📄 a-source-file.adoc
+      📄 nav.adoc
+----
+
+You don't need to set the path to these predefined directories in the header of your pages.
+This is managed automatically by Antora.
+****

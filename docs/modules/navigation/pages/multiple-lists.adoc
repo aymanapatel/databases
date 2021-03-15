@@ -1,0 +1,151 @@
+= Create a Navigation File with Multiple Lists
+
+== Structuring multiple lists
+
+A navigation file can contain more than one xref:asciidoc:ordered-and-unordered-lists.adoc#unordered[unordered AsciiDoc lists].
+When a navigation file contains multiple lists:
+
+* each list must start with a list title, and
+* each list must be separated by at least one blank line.
+
+[source]
+----
+.List title <1>
+* List item
+<2>
+.Second list title <3>
+* List item <4>
+----
+<1> Required list title.
+A list title is preceded by a dot (`.`).
+There must be *no spaces* between the `.` and the content of the title.
+<2> Required blank line between lists.
+<3> Required list title.
+<4> List item.
+
+When converted to HTML, the list titles become top-level items and all of their list items are nested under them in cascading order.
+The blank line between the lists is not present in the published menu.
+
+Each navigation list is made up of list items.
+
+.Navigation file with multiple lists
+[source]
+----
+.List title <1>
+* List item <2>
+* List item <3>
+** Nested item <4>
+
+.List title <5>
+* List item
+** Nested item
+
+.List title
+* List item
+----
+<1> A list title becomes the top-level list item of a list.
+<2> A list item preceded by an unordered AsciiDoc list marker (`+*+`).
+<3> Each list item must be entered on its own line.
+<4> Enter a blank space between the last asterisk of a marker and the content of your list item.
+<5> A list title, indicating the start of another navigation list.
+
+Each list item is preceded by a marker.
+An unordered AsciiDoc list's marker can range from one asterisk (`+*+`) to five asterisks (`+*****+`).
+
+== Create a navigation file with two lists
+
+Let's create a navigation file that contains two navigation lists for the pages in a module.
+The most common items in a navigation list are xrefs to pages xref:organize-files.adoc[that belong to the same module as the navigation file].
+The exercise below assumes that the navigation file will belong to the same component version and module as the pages it is referencing.
+That means the page IDs won't need to specify version, component, or module coordinates.
+
+. Open a new file in the text editor or IDE of your choice.
+. On the first line, type a dot (`.`), directly followed by an xref macro prefix and the page ID of the target page.
++
+[source]
+----
+.xref:get-started.adoc
+----
+
+. At the end of the page ID, complete the macro with a set of square brackets (`+[]+`).
+Press kbd:[Enter] to go to the next line.
++
+--
+[source]
+----
+.xref:get-started.adoc[]
+----
+
+Since there isn't any link text specified inside the square brackets, Antora will use the value of the target page's xref:xrefs-and-link-text.adoc#default-link-text[default link text] when it generates the site.
+--
+
+. Let's add a list item.
+Type an asterisk (`+*+`), followed by a blank space, and then an xref.
+This time, enter link text inside the set of square brackets (`+[]+`).
+Press kbd:[Enter]
++
+--
+[source]
+----
+.xref:get-started.adoc[]
+* xref:install.adoc[Installation Setup and Steps]
+----
+
+The link text, _Installation Setup and Steps_, will be displayed in the component version page menu.
+--
+
+. Let's start a new list.
+Press kbd:[Enter] to insert a blank like between the lists.
+On a new line, type a dot (`.`), directly followed by regular text.
+This list title won't reference a page.
++
+[source]
+----
+.xref:get-started.adoc[]
+* xref:install.adoc[Installation Setup and Steps]
+
+.CLI Commands and Options
+----
+
+. On the next line, type an asterisk (`+*+`), a blank space, and then an xref macro.
+This item is a cross reference that will use the target page's default link text.
++
+[source]
+----
+.xref:get-started.adoc[]
+* xref:install.adoc[Installation Setup and Steps]
+
+.CLI Commands and Options
+* xref:commands.adoc[]
+----
+
+. Finally, nest a list item under the previous item.
+Type two asterisks (`+**+`), followed by a blank space, and then an xref.
++
+[source]
+----
+.xref:get-started.adoc[]
+* xref:install.adoc[Installation Setup and Steps]
+
+.CLI Commands and Options
+* xref:commands.adoc[]
+** xref:commands-in-action.adoc[]
+----
+
+. Save the file as [.path]_nav.adoc_ in the xref:ROOT:module-directories.adoc#module-dir[module directory] that contains the page source files referenced in the list.
+The navigation file should be located at the same hierarchy level as the [.path]_pages_ directory.
+*Don't save it in the [.path]_pages_ folder!*
++
+--
+----
+📂 modules
+  📂 a-module
+    📂 pages
+    📄 nav.adoc
+----
+
+You can also save the file with the filename of your choice, as long as the extension is _.adoc_.
+--
+
+You've now create a navigation file for a module!
+Make sure you xref:register-navigation-files.adoc[register it in _antora.yml_] so it becomes part of the component version page menu.

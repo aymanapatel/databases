@@ -1,0 +1,54 @@
+= Pages Directory and Files
+
+[#pages-dir]
+== Pages family directory
+
+A module directory can contain an xref:family-directories.adoc[optional family directory] named [.path]_pages_.
+Only AsciiDoc source files with the file extension (_.adoc_) should be stored in the [.path]_pages_ directory because Antora applies preset behavior to these files when it runs.
+
+----
+📂 modules
+  📂 a-named-module <1>
+    📂 pages <2>
+      📄 a-source-file.adoc <3>
+  📂 ROOT
+    📂 pages
+      📄 a-source-file.adoc
+    📄 nav.adoc
+----
+<1> A named module directory
+<2> [.path]_pages_ family directory
+<3> AsciiDoc source file with valid _.adoc_ file extension
+
+A [.path]_pages_ family directory must contain at least one AsciiDoc source file.
+
+[#pages]
+== Pages
+
+[.term]*Pages* are source files stored in a [.path]_pages_ directory.
+Each page is automatically converted to HTML and published as an individual page in a site.
+xref:page:index.adoc[Valid pages] are marked up using AsciiDoc and saved with the _.adoc_ file extension.
+Antora uses the xref:page:standard-page.adoc[filename of each page file] as the page segment in its URL.
+
+A page can be cross referenced by any other page, regardless of the component version or module it's assigned to, using the AsciiDoc xref macro and the page's xref:page:page-id.adoc[page ID].
+
+
+////
+.pages directories located in two module directories
+....
+📂 modules
+  📂 get-started <1>
+    📂 pages <2>
+      📄 tour.adoc <3>
+  📂 ROOT
+    📂 images
+    📂 pages
+      📄 index.adoc <4>
+      📄 results-and-rewards.adoc
+    📄 nav.adoc
+....
+<1> Module directory named [.path]_get-started_.
+<2> [.path]_pages_ directory stored in the module directory [.path]_get-started_.
+<3> Antora will automatically convert the AsciiDoc source file, [.path]_tour.adoc_, that's stored in the [.path]_pages_ directory, into an individual site page, i.e., [.path]_tour.html_.
+<4> In some cases, Antora applies default behavior to a source file named [.path]_index.adoc_ that's stored in the [.path]_pages_ directory of the [.path]_ROOT_ module directory.
+////

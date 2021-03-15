@@ -1,0 +1,7 @@
+// Don't use this partial because this feature isn't active.
+
+[#videos-dir]
+== Video files
+
+Self-hosted video files are saved in [.path]_assets/videos_ in the same module where the page that references that video is located.
+Videos are inserted into a page using the xref:asciidoc:embed-video.adoc[AsciiDoc video macro].

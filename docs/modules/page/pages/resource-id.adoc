@@ -1,0 +1,79 @@
+= Resources and Resource IDs
+:family: resource
+:colon: :
+
+No matter which component version or module a resource's source file belongs to, you can add it to any page in your site using its resource ID and the applicable AsciiDoc syntax.
+
+[#whats-a-resource-id]
+== What's a resource ID?
+
+An [.term]*Antora resource ID* is a unique and reliable set of identifying coordinates, organized in a standard sequence, that are constructed from the properties assigned to each resource's source file.
+
+A [.term]*resource* is a source file that is assigned to the attachments, examples, images, pages, or partials family.
+When a resource is referenced, the target value in the corresponding AsciiDoc macro or include directive must be a valid Antora resource ID.
+
+In Antora, a resource is referenced using an AsciiDoc include directive, link macro, or image macro and the resource ID of the target resource.
+(Except for <<reference-syntax-id-requirements,attachments>>.)
+[[target-resource]]The [.term]*target resource* is the source file that will be embedded in current page when the site is published.
+[[current-page]]The [.term]*current page* is the page, partial, or example containing the AsciiDoc macro or directive that references the target resource.
+
+[#id-coordinates]
+== What are the resource ID coordinates?
+
+Antora constructs a resource ID for a source file from the key-value pairs specified in a xref:ROOT:component-version-descriptor.adoc[component version descriptor] and the xref:ROOT:standard-directories.adoc[standard directory set].
+Using this information, a resource can be referenced from any page, partial, or example in your site using a unique and reliable set of resource ID coordinates.
+
+A fully qualified resource ID with its coordinates organized in the standard sequence is shown below.
+
+ version@component:module:family$resource.ext
+
+include::partial$antora-id.adoc[tags=*;!page]
+
+How many resource ID coordinates you need to specify when referencing a resource depends on the component version and module of the <<current-page,current page>> in relation to the <<target-resource,target resource>>.
+
+[#requires-family-coordinate]
+== When is the family coordinate required?
+
+The family coordinate doesn't always need to be specified in a resource ID.
+It may be implicitly assigned by the AsciiDoc syntax you use to reference the resource.
+For instance, an image is always embedded in a page using an AsciiDoc image macro.
+Since images are only referenced using the image macros, the `image$` coordinate is automatically applied to the target resource ID at runtime.
+
+On the other hand, the AsciiDoc include directive can be used to reference partials, examples, and pages, so a family coordinate must be specified in the target resource ID.
+The syntax that requires an explicit family coordinate is listed in the table below.
+
+[#reference-syntax-id-requirements]
+[cols="1,4,5"]
+|===
+|Resource |Referencing syntax |Resource ID requirements
+
+|Attachments
+|`+link:{attachmentsdir}/file-name.ext[]+`
+|Currently, an attachment can't be referenced using a resource ID.
+*The attribute reference `+{attachmentsdir}+` is required* in the target value.
+See xref:asciidoc:link-attachment.adoc[Link to an attachment].
+
+|xref:examples-and-source-snippets.adoc[Examples]
+|`include::resource-id[]`
+|*The `example$` coordinate is required* in the target value.
+See xref:include-an-example.adoc[Include an example].
+
+.2+|xref:images.adoc[Images]
+|`image::resource-id[]`
+|No family coordinate required; it's automatically applied at runtime.
+See xref:block-images.adoc[Add block images] and xref:image-resource-id-examples.adoc[Image resource ID examples].
+
+|`+image:resource-id[]+`
+|No family coordinate required; it's automatically applied at runtime.
+See xref:inline-images.adoc[Add inline images] and xref:image-resource-id-examples.adoc[Image resource ID examples].
+
+|xref:index.adoc[Pages]
+|`include::resource-id[]`
+|*The `page$` coordinate is required* in the target value.
+See xref:include-a-page.adoc[Include a page].
+
+|xref:partials-and-content-snippets.adoc[Partials]
+|`include::resource-id[]`
+|*The `partial$` coordinate is required* in the target value.
+See xref:include-a-partial.adoc[Include a partial].
+|===

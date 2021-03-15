@@ -1,0 +1,15 @@
+= Reference Attachments
+
+When a list item is a reference to an attachment, the link is created using the link macro (`+link:{attachmentsdir}/filename.ext[link text]+`).
+
+== Attachment links
+
+An attachment is a resource stored in an xref:ROOT:attachments-directory.adoc[_attachments_ directory].
+To xref:asciidoc:link-attachment.adoc[insert a link to an attachment], use the AsciiDoc link macro (`+link:[]+`).
+
+[source]
+----
+* xref:filename.adoc[]
+* Additional Materials
+** link:{attachmentsdir}/filename.ext[Link text]
+----

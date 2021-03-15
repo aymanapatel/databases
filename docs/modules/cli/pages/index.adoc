@@ -1,0 +1,211 @@
+= Antora CLI Commands
+
+This page introduces you to the Antora CLI and how you can use it to configure and run Antora.
+
+== What's the Antora CLI?
+
+The Antora command line interface (Antora CLI) is a simple tool (named `antora`) that enables you to execute and optionally configure Antora and any registered extended components and extensions from the command prompt of your terminal application.
+
+Antora's CLI is the primary user-facing entry point for Antora.
+Therefore, you'll frequently see it referenced in the documentation as the recommended way to interact with Antora.
+
+TIP: If you aren't familiar with the command line, the xref:primer.adoc[] provides a basic overview of command anatomy, navigating working directories, and terminal application concepts.
+
+By default, Antora looks in the provided playbook for its configuration settings.
+When using the Antora CLI, you can specify optional configuration overrides as necessary using CLI options or environment variables.
+
+[#usage]
+== Usage
+
+When you interact with a CLI, you type a command into the prompt of your terminal application, then press kbd:[Enter] to execute it.
+The command consists of the program name (or program path) followed by zero or more options and arguments.
+In the next few sections, we'll break down these parts for the Antora CLI.
+
+NOTE: For certain programs, like Antora, a command can also refer to the primary argument of the program.
+This can be confusing because you'll see the term *command* used to represent two distinct concepts.
+One is the whole command you type at the prompt and the other is the program's primary argument.
+
+Every command starts with the base call (i.e., program name or path).
+
+.antora base call
+[listing#ex-base]
+$ antora
+
+In the case of the Antora CLI, the base call is `antora`.
+This assumes that the Antora CLI is available on the `PATH` (e.g., installed globally).
+Otherwise, the base call must be the path to the `antora` bin script (e.g., `$(npm bin)/antora`).
+The base call must be offset from any command (for the program), options, or arguments by at least one space.
+
+If you run the base call without specifying any command, options, or arguments, as shown in <<ex-base>>, you will be presented with a usage statement (i.e., help text).
+
+.Usage statement
+....
+$ antora
+Usage: antora [options] [[command] [args]]
+
+A modular, multi-repository documentation site generator for AsciiDoc.
+
+Options:
+  -v, --version                  Output the version number.
+  -r, --require <library>        Require library (aka node module) or script before executing command.
+  --stacktrace                   Print the stacktrace to the console if the application fails.
+  -h, --help                     Output usage information.
+
+Commands:
+  generate [options] <playbook>  Generate a documentation site specified in <playbook>.
+
+Run 'antora <command> --help' to see options and examples for a command (e.g., antora generate --help).
+....
+
+The usage statement provides an overview of the `antora` program, which includes:
+
+* the command syntax,
+* a description,
+* a list of global options,
+* a list of commands, and
+* a suggestion for how to request additional help.
+
+The usage statement begins with the following hint:
+
+....
+Usage: antora [options] [[command] [args]]
+....
+
+That's the cue to learn more about the options, commands, and args (i.e., arguments) it recognizes.
+
+[#commands]
+== Commands
+
+The commands supported by the Antora CLI are summarized in the following table.
+In this context, the term [.term]*command* refers to the primary argument accepted by the `antora` base call (as opposed to the command as a whole).
+
+[cols="1,2",width=80%]
+|===
+|Command |Purpose
+
+|`generate`
+|Generates a site using the specified playbook file.
+Antora runs `generate` automatically with the default Antora pipeline unless an alternate command is specified.
+The command requires the path to a playbook file, relative to the working directory, be specified in the command's only argument.
+
+|`help`
+|Outputs the usage statement for the Antora CLI.
+Note that this command is not shown in the usage statement.
+
+|`version`
+|Outputs the version number of the Antora CLI.
+Note that this command is not shown in the usage statement.
+|===
+
+`help` and `version` are meta commands that show information about the Antora CLI itself.
+The Antora CLI currently only supports one functional command, which is `generate`.
+Since `generate` is the primary function of the Antora CLI, you don't have to specify it explicitly.
+The `generate` command will always be implied if no command is specified (unless you execute the base call by itself).
+
+////
+Although only one command is shown in this table, the Antora CLI is designed to accommodate additional commands, which will likely be added in future releases.
+
+Since the Antora CLI currently only supports a single command, you don't have to specify it explicitly.
+The `generate` command will always be implied if no command is specified (unless you execute the base call by itself).
+////
+
+[#generate-command]
+=== generate command
+
+The simplest way to execute Antora using the Antora CLI is to specify the required base call (`antora`) followed by the path to a playbook file, as shown in <<ex-simple>>.
+
+.antora base call with playbook argument
+[listing#ex-simple]
+$ antora antora-playbook.yml
+
+You've learned that the `generate` command is implied if not present.
+Therefore, <<ex-simple>> is equivalent to the command shown in <<ex-with-command>>.
+
+.antora base call with explicit command and playbook argument
+[listing#ex-with-command]
+$ antora generate antora-playbook.yml
+
+Let's break down this command:
+
+. The command assumes that the Antora CLI is available on the `PATH` (e.g., installed globally).
+Otherwise, it would be necessary to replace `antora` with the path to the `antora` bin script (e.g., `$(npm bin)/antora`).
+. The base call, `antora`, tells the Antora CLI to run, which reads the remaining command and argument.
+. The command specified (implicitly or explicitly) is `generate`.
+You don't see the command in <<ex-simple>> because it's optional, but Antora implies it's there if not present.
+The options and arguments that follow the command apply to the command, so control changes hands to the command at this point.
+. The `generate` command requires an explicit argument that <<specify-playbook,specifies the filesystem path of a playbook file>> relative to the current working directory.
+In <<ex-simple>>, the relative filesystem path to the playbook file is [.path]_antora-playbook.yml_.
+That is, the command is being executed from the same directory where the playbook file is located.
+
+[#specify-playbook]
+== Specify a playbook
+
+The `generate` command, whether implicit or explicitly entered, requires an argument that specifies the filesystem path of a playbook file relative to the xref:primer.adoc#working-directory[current working directory].
+
+For the next example, let's use a playbook file named [.path]_antora-playbook.yml_ that's located in [.path]_home/my-projects/a-project/docs-site_.
+As shown directly before the command prompt (`$`) in <<ex-working>>, the working directory is [.path]_docs-site_.
+That means the processes associated with the `antora` and `generate` commands as well as the playbook argument will be interpreted relative to [.path]_docs-site_.
+Since the playbook file, [.path]_antora-playbook.yml_, happens to be located in the working directory, only the playbook's file name needs to be specified.
+
+.Specify a playbook located in the working directory
+[listing#ex-working]
+docs-site $ antora antora-playbook.yml
+
+When the playbook isn't stored in the working directory, the playbook argument must include the path relative to the working directory or the full path to the playbook file from the filesystem's root directory.
+
+The working directory in <<ex-relative>> is [.path]_my-projects_.
+The playbook file is stored in [.path]_home/my-projects/a-project/docs-site_.
+
+.Specify the filesystem path to the playbook
+[listing#ex-relative]
+my-projects $ antora a-project/docs-site/antora-playbook.yml
+
+In <<ex-relative>>, the playbook's filesystem path relative to the working directory is entered as the command's sole argument.
+
+=== Playbook file extension
+
+The file extension of the playbook doesn't need to be specified.
+Antora auto-detects the file extension as long as the playbook argument includes the file's stem (e.g., [.path]_antora-playbook_).
+
+The playbook argument in <<ex-detect>> doesn't have a file extension, so Antora will look for a file matching the playbook's file stem relative to the working directory.
+
+.Auto-detection of the playbook file extension
+[listing#ex-detect]
+docs-site $ antora antora-playbook
+
+Antora's search order for playbook file formats is YAML, then JSON, and then TOML.
+
+NOTE: You can see more examples of the `antora` and `generate` commands in xref:ROOT:run-antora.adoc#run-antora[Run Antora].
+
+[#help]
+== Display the Antora CLI help
+
+If you've read this whole page, you already know how to display the main help text for the Antora CLI.
+Just type `antora` by itself and press kbd:[Enter].
+But there's a more idiomatic way to do it.
+
+The Antora CLI accepts xref:options.adoc[options].
+One such option is the help option, `-h` or `--help`.
+This option will short-circuit the execution of the program and instead display the <<usage,usage statement>>.
+The usage statement contains information about the program and its commands, options, and arguments.
+
+The command in <<ex-base-help>> will display help for the `antora` program.
+
+.Display help for the antora base call
+[listing#ex-base-help]
+$ antora -h
+
+Another way to display the help is to use the implicit `help` command:
+
+ $ antora help
+
+As suggested at the end of the usage statement, you can also display help for the `generate` command by including the name of the command to the base call and moving the `-h` option after it.
+
+.Display help for the generate command
+ $ antora generate -h
+
+You can also write this command using the implicit `help` command:
+
+ $ antora help generate
+
+There are many more options supported by the Antora CLI, which are covered in xref:options.adoc[].

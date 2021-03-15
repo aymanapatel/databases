@@ -1,0 +1,45 @@
+= Git Keys
+
+The playbook keys configured under `git` control the behavior of the git client in Antora.
+
+[#git-key]
+== git key
+
+The `git` key holds all the git-related playbook keys, such as the git credentials and automatic URL suffix.
+
+.antora-playbook.yml
+[source,yaml]
+----
+git: # <1>
+  ensure_git_suffix: false # <2>
+  credentials: # <3>
+    path: ./.git-credentials # <4>
+----
+<1> Optional `git` key
+<2> Optional `ensure_git_suffix` key
+<3> Optional `credentials` key
+<4> Optional `path` key
+
+The `git` key and the child key-value pairs it accepts are optional.
+When the `git` key isn't present in the playbook, Antora falls back to using default configuration for the git client.
+
+[#git-reference]
+== Available git keys
+
+[cols="3,6,1"]
+|===
+|Git Keys |Description |Required
+
+|xref:git-credentials-path-and-contents.adoc[credentials.contents]
+|Accepts git credentials data matching the format used by the git credential store.
+|No
+
+|xref:git-credentials-path-and-contents.adoc[credentials.path]
+|Accepts a filesystem path to a git credentials file matching the format used by the git credentials store.
+|No
+
+|xref:git-suffix.adoc[ensure_git_suffix]
+|`true` by default.
+When `true`, this key instructs the git client to automatically append [.path]_.git_ to content sources repository URLs if absent.
+|No
+|===

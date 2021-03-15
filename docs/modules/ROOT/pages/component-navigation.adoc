@@ -1,0 +1,47 @@
+= Assign Navigation Files to a Component Version
+//:listing-caption: Example
+:xrefstyle: short
+
+On this page, you'll learn:
+
+* [x] How to register navigation files with the `nav` key in [.path]_antora.yml_.
+* [x] How registration order affects the component version's page menu.
+
+[#nav-key]
+== nav key
+
+The `nav` key is optional.
+It's set in a component version's [.path]_antora.yml_ file and accepts a list of xref:navigation:files-and-lists.adoc[navigation files].
+Each value specifies the path to a navigation file (e.g., [.path]_modules/module-directory/nav-file.adoc_) from [.path]_antora.yml_.
+
+.antora.yml that registers two navigation files
+[source,yaml]
+----
+name: colorado
+title: Colorado ∆
+version: '5.6'
+nav: # <1>
+- modules/get-started/nav.adoc # <2>
+- modules/ROOT/nav.adoc # <3>
+----
+<1> The `nav` key must be entered on its own line and be directly followed by a colon (`:`).
+<2> Value registering a navigation file located in the [.path]_get-started_ module directory.
+<3> Value registering a navigation file located in the [.path]_ROOT_ module directory.
+
+Each value listed under `nav` must be structured as follows:
+
+* Don't indent the values.
+* Enter each value on its own line.
+* Start each value with a hyphen (`-`), followed by a blank space.
+* After the blank space, enter the path to an individual navigation file relative to the location of the [.path]_antora.yml_ file.
+
+A navigation file is [.term]*registered* when it's assigned to the `nav` key.
+Only the contents of registered navigation files are assembled into and published as the component version's page menu.
+The order of the values dictates the order the contents of the navigation files are displayed in the xref:navigation:index.adoc#component-menu[component version's page menu] on your site.
+
+== Learn more
+
+* xref:navigation:index.adoc[]
+* xref:navigation:files-and-lists.adoc[]
+* xref:navigation:organize-files.adoc[]
+* xref:navigation:register-navigation-files.adoc[]

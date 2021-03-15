@@ -1,0 +1,35 @@
+= Attachments Directory and Files
+
+[#attachments-dir]
+== Attachments family directory
+
+A module directory can contain an xref:family-directories.adoc[optional family directory] named [.path]_attachments_.
+
+----
+📂 modules
+  📂 ROOT
+    📂 attachments <1>
+      📄 a-source-file.zip <2>
+    📂 pages
+      📄 a-source-file.adoc
+    📄 nav.adoc
+----
+<1> An [.path]_attachments_ family directory in a [.path]_ROOT_ module directory
+<2> An attachment source file
+
+Antora applies preset behavior to the source files stored in an [.path]_attachments_ directory when it generates a site.
+
+[#attachments]
+== Attachments
+
+An [.term]*attachment* is a resource, such as the ZIP archive of a sample project, that a site visitor can download via a link.
+The source files for attachments are stored in an [.path]_attachments_ directory.
+A link to an attachment is created in a page or partial using the xref:asciidoc:link-attachment.adoc[AsciiDoc link macro].
+Currently, you can't xref:page:resource-id.adoc#reference-syntax-id-requirements[reference an attachment] using an Antora resource ID.
+
+=== Binaries and other large files
+
+If your content includes large attachment files, such as sample project binaries, libraries, or PDFs, we don't recommend storing them in a regular git repository.
+Instead, host them in a binary repository such as Bintray or S3, or use git LFS (Large File Storage).
+
+include::partial$assets-directory.adoc[]

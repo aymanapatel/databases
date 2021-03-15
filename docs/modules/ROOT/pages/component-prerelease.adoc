@@ -1,0 +1,91 @@
+= Identify a Prerelease Version
+:listing-caption: Example
+:xrefstyle: short
+
+The `prerelease` key informs Antora that a component version is a prerelease.
+When generating a site, Antora doesn't apply the default routing rules to component versions designated as prereleases.
+
+[#prerelease-key]
+== prerelease key
+
+The `prerelease` key is optional.
+It's set in a component version's [.path]_antora.yml_ file and assigned a user-defined identifier or the reserved `true` value.
+Antora doesn't apply the default routing rules to a component version that is defined as a prerelease with the `prerelease` key, even if it's the <<sort-and-route,latest version in that docs component>> (unless all versions of that docs component are prereleases).
+
+[#identifier]
+=== Assign an identifier to prerelease
+
+A component version becomes a prerelease when the `prerelease` key is set in [.path]_antora.yml_ and assigned an identifier.
+An [.term]*identifier* is a user-defined, non-empty string such as `.alpha.2`, `YAY`, `Beta`, and `-rc.5`.
+It can contain uppercase letters and a broad range of characters.
+
+The component version defined in <<ex-append-identifier>> is a prerelease.
+
+[#ex-append-identifier]
+.antora.yml with prerelease assigned the identifier -rc.3
+[source,yaml]
+----
+name: colorado
+title: Colorado ∆
+version: '6.0'
+prerelease: -rc.3 # <1>
+----
+<1> Assign an identifier to `prerelease` to designate the component version as a prerelease.
+
+When `prerelease` is assigned an identifier, Antora computes an internal prerelease version value for UI sorting and, if `display_version` isn't set, for display purposes.
+This computed prerelease version depends on the first character in the prerelease identifier.
+
+Identifiers that begin with a hyphen(`-`) or dot(`.`)::
+The computed prerelease version takes the form of `version-identifier` or `version.identifier`.
+Antora directly appends the prerelease identifier to the `version` key's value to compute the prerelease version.
+For instance, using <<ex-append-identifier>>, the computed prerelease version would be _6.0-rc.3_.
+
+Identifiers that begin with any other valid character::
+The computed prerelease version takes the form of `version identifier`.
+Antora separates the identifier from the `version` key's value with one blank space to compute the prerelease version.
++
+--
+[#ex-compute]
+.antora.yml with prerelease assigned the identifier Beta
+[source,yaml]
+----
+name: colorado
+title: Colorado ∆
+version: '6.0'
+prerelease: Beta
+----
+
+Using <<ex-compute>>, the computed prerelease version would be _6.0 Beta_.
+--
+
+Unless the `display_version` key already has a value, Antora automatically assigns the computed prerelease version to it.
+If `display_version` is defined in [.path]_antora.yml_, then that value is displayed in the reference UI.
+However, the component version is still <<sort-and-route,sorted according to the internally computed prerelease version value>>.
+
+[#true]
+=== Assign true to prerelease
+
+A component version becomes a prerelease when the `prerelease` key is set in [.path]_antora.yml_ and assigned the value `true`.
+
+[#ex-true]
+.antora.yml with prerelease defined as true
+[source,yaml]
+----
+name: colorado
+title: Colorado ∆
+version: '6.0'
+prerelease: true
+----
+
+When `prerelease` is `true`, the component version is sorted by the value of `version` but the <<sort-and-route,default routing rules>> aren't applied to it even if it's the latest version in that docs component.
+Also, there's no visual cue displayed in the reference UI that indicates to a visitor that the component version is a prerelease version.
+To visually indicate in a site that a component version is a prerelease, you need to either:
+
+* define `prerelease` as `true` and xref:component-display-version.adoc[assign a value to display_version] that provides a prerelease version name or number, or
+* <<identifier,assign an identifier>> to `prerelease`.
+
+[#sort-and-route]
+== Prerelease sorting and routing
+
+Prerelease versions are skipped when Antora selects the xref:how-component-versions-are-sorted.adoc#latest-version[latest version of a docs component] (unless all component versions are prereleases, in which case the default rules apply).
+They're sorted according to the xref:how-component-versions-are-sorted.adoc#version-schemes[versioning scheme criteria] the computed prerelease version meets.
