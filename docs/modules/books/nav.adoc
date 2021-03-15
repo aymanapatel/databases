@@ -1,0 +1,6 @@
+* xref:database_internals.adoc[Database Internals]
+* xref:designing-di-apps-martin.adoc[Martin Kleppmann]
+* xref:High_Persistance_JPA_Vlad.adoc[Vlad JPA]
+* xref:learning_sql_3rdedition_oreilly.adoc[Learning SQL]
+
+

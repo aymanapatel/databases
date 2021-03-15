@@ -1,8 +1,0 @@
-.Generate Your Site
-* xref:run-antora.adoc[]
-* xref:preview-site.adoc[]
-* xref:cli:index.adoc[]
-** xref:cli:options.adoc[]
-** xref:cli:primer.adoc[]
-* xref:cache.adoc[]
-* xref:antora-container.adoc[]

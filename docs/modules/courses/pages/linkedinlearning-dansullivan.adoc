@@ -1,0 +1,105 @@
+= LinkedIn Learning - Dan Sullivan
+Ayman Patel
+:toc:
+:icons: font
+
+> Dan Sullivan courses
+
+
+
+== Advanced SQl for Query Tuning and Performance Optimization
+
+|===
+
+| Thing | Link
+
+|Resources| test
+|===
+
+
+=== How SQL executes a Query
+
+
+==== From declarative SQl to a procedural execution plan
+
+- Modern SQL has some data types such as rollups and cubes that do not go intp row of RDBMSs
+
+SQL takes declarative statements and create procedural **execution plans**; which are a set of steps that SCAN, FILTER and JOIN data.
+
+
+==== Scanning tables and indexes
+
+Use indexes to prevent high-cost FULL TABLE SCANS.Indexes pint to location of a row.
+
+
+Types of indexes:
+
+1. **B-Tree*: For equality and range queries
+2. **Hash Indexes**: For equality
+3. **Bitmap**: For set operations such as INTERSECTION and UNION.
+4. Specialized indexes dor geo-spatioal or user-defined indexing straegies.
+
+
+
+==== Joining tables
+
+
+There are three types to join tables
+
+
+|===
+
+| Type| Description | Example
+
+| Nested Loop Join |Compare all rows in both tables to each other
+
+a|
+
+- Loop through one tables
+- For each row, loop thoigh other tawble
+- At each step, compare keys
+- [green]#simple to implement
+- [red]#Higher cost#
+
+|HashJoin| Calculate hash value of key and join based on matching hash values
+
+a|
+
+TODO
+
+
+| Sort Merge join | Sort both tables annd then join rows while taking advantage of order
+
+a|
+
+TODO
+
+
+|===
+
+==== Partitioning data
+
+- Storing table data in multiple sub-tables known as partitions
+- Used to improve Query, Load and DELETE partitions
+- Used for large tables- When subset of data is accessed or changed
+- Can be expensive
+- Partition key to be created for partitioning. (Can be date)
+
+
+
+=== Materialized View
+
+
+==== Refresh
+
+Whenever you update row , you need to refresh materialized view so that you can see most latest changes.
+
+
+== Advanced SQL for Application Development
+
+
+== Designing Highly Scalable and Highly available SQL databases
+
+
+
+

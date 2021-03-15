@@ -1,0 +1,89 @@
+= High-Performance Java Persistence - Vlad Mihalcea
+:toc:
+
+ifdef::env-github[]
+++++
+<p align="center">
+  <img width="460" height="300" src="https://images-eu.ssl-images-amazon.com/images/I/511Tq0kh7CL._SR600%2C315_PIWhiteStrip%2CBottomLeft%2C0%2C35_PIStarRatingFIVE%2CBottomLeft%2C360%2C-6_SR600%2C315_ZA41%2C445%2C290%2C400%2C400%2CAmazonEmberBold%2C12%2C4%2C0%2C0%2C5_SCLZZZZZZZ_FMpng_BG255%2C255%2C255.jpg">
+</p>
+++++
+endif::[]
+
+ifndef::env-github[]
+image::https://images-eu.ssl-images-amazon.com/images/I/511Tq0kh7CL._SR600%2C315_PIWhiteStrip%2CBottomLeft%2C0%2C35_PIStarRatingFIVE%2CBottomLeft%2C360%2C-6_SR600%2C315_ZA41%2C445%2C290%2C400%2C400%2CAmazonEmberBold%2C12%2C4%2C0%2C0%2C5_SCLZZZZZZZ_FMpng_BG255%2C255%2C255.jpg[A map, 550, align=center]
+endif::[]
+
+== Batch Updates
+
+== JDBC Connection Management
+
+== Performance and Scaling
+
+
+== Statement Caching
+
+== `ResultSet` fetching
+
+== Transactions
+
+=== Atomicity
+
+
+=== Consistency
+
+=== Isolation
+
+
+==== Concurrency Control
+
+===== 2-phase Locking
+
+===== MVCC
+
+==== READ Phenomena
+
+===== Dirty Write
+
+===== Dirty READ
+
+===== Non-repeatable READ
+
+===== Phantom READ
+
+===== Read Skew
+
+===== Write Skew
+
+===== Lost update
+
+==== Isolation Levels
+
+===== Read Uncommitted
+
+===== Read Committed
+
+===== Repeatable READ
+
+===== Serializable
+
+=== Durability
+
+=== READ-ONLY Transaction Routing
+
+=== Transaction Boundaries
+
+==== Distributed Transaction
+
+===== 2 Phase Commit
+
+
+==== Declarative Transactions
+
+
+=== Application-Level Transactions
+
+==== Pessimistic and Optimistic Locking
+
+===== Pessimistic Locking
+
+===== Optimistic Locking

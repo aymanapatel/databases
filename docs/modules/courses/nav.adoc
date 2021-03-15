@@ -1,2 +1,6 @@
 .Courses
 * xref:udemy-hussein-nasser.adoc[]
+* xref:linkedinlearning-dansullivan.adoc[Dan Sullivan-Advanced SQL]
+* xref:cmu/01_beginner/README.adoc[CMU/Beginner]
+* xref:cmu/02_advanced/README.adoc[CMU/Advanced]
+
