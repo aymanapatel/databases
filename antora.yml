@@ -1,0 +1,8 @@
+name: component-b
+title: Component B
+version: dev
+nav:
+- README.adoc
+- database_oem/Mongo.adoc
+- database_oem/postgres.adoc
+- courses/udemy-hussein-nasser.adoc
