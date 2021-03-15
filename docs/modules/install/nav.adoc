@@ -1,10 +1,4 @@
-.Get Antora
-* xref:linux-requirements.adoc[]
-* xref:macos-requirements.adoc[]
-* xref:windows-requirements.adoc[]
-* xref:install-antora.adoc[]
-* xref:upgrade-antora.adoc[]
-* xref:supported-platforms.adoc[]
+.Database OEM
 * xref:Cassandra.adoc[Cassandra]
 * xref:Mongo.adoc[Mongo]
 * xref:Oracle-Mysql.adoc[Oracle MySQL]

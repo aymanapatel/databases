@@ -1,3 +1,0 @@
-= macOS Requirements
-:platform: macOS
-include::page$linux-requirements.adoc[tag=shared]
