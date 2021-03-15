@@ -5,3 +5,9 @@
 * xref:install-antora.adoc[]
 * xref:upgrade-antora.adoc[]
 * xref:supported-platforms.adoc[]
+* xref:Cassandra.adoc[Cassandra]
+* xref:Mongo.adoc[Mongo]
+* xref:Oracle-Mysql.adoc[Oracle MySQL]
+* xref:Postgres.adoc[Postgres]
+
+
