@@ -1,4 +1,4 @@
-. Books
+.Books
 * xref:database_internals.adoc[Database Internals]
 * xref:designing-di-apps-martin.adoc[Martin Kleppmann]
 * xref:High_Persistance_JPA_Vlad.adoc[Vlad JPA]
