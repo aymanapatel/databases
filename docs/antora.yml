@@ -14,7 +14,7 @@ asciidoc:
     url-node-releases: https://nodejs.org/en/about/releases/
 nav:
 - modules/ROOT/nav-start.adoc
-- modules/install/nav.adoc
+- modules/database-oem/nav.adoc
 - modules/ROOT/nav-content-sources.adoc
 - modules/ROOT/nav-component-versions.adoc
 - modules/page/nav.adoc
