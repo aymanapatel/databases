@@ -1,4 +1,4 @@
-= https://learning.oreilly.com/library/view/database-internals/9781492040330/[Database Internals]
+= https://learning.oreilly.com/library/view/database-internals/9781492040330/[Database Internals by Alex Petrov]
 :toc:
 :icons: font
 
