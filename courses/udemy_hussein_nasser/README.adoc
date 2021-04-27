@@ -1,6 +1,7 @@
-= Notes on DB engineering 
+= Notes on DB engineering Course By Hussein Nasser
 :toc: 
 :icons: font
+
 
 == Section 02: ACID
 
@@ -222,11 +223,53 @@ NOTE: Merkle tree, SSTable and Boom filter has some correlation. Do not have ins
 
 == Section 16: Miscellaneous DB Discussion
 
+=== `SELECT COUNT(*)` Apocalypse
+
+📝 TODO
+
+- Setup Docker with 10 million records (Hussein has done in **some** video)
+- Take scrennshots and watch video.
+
+|===
+| Query | Description | Additional Info
+
+| `SELECT COUNT(g) from gradfes where id between 10000 and 4000;` | No isolation, any change from outside is visible to the transaction. (All read ugliness is allowed) | 
+
+| `explain analyse SELECT COUNT(g) from gradfes where id between 10000 and 4000;` | Use `EXPLAIN ANALYSE` to understand the query Under the Hood a|
+```
+Aggregate(cost=130.04..130.05 rows=1 width=8) (actual ti.051..14.102 rows=1 loops=1)
+-> Index Scan using grades_pkey on grades((cost=0.57 rows=2869 width=4) (actual time=0.074..62.310 rows=3001 lo)
+Index Conditional-  ((id>=1000) AND (id<4000))
+PlanningTume: 0.721ms
+Execution Time: 124.369ms 
+```
+
+
+| REPEATABLE READ| Each query in transaction only sees committed updates at beginning of transaction | Some DB use versioning for RR. (Example, Cassandra.) Other DB use Lock. Other DB use SHARED LOCK.
+
+| SERIALIZABLE (Most isolated, slowest)| Transactions are serilaized|
+
+|===
+
+Query:
+
+``
+
+:
+
+
+
+
+
 
 === Distributed Transaction
 
 
 === Server-side vs Client-Side DB
+
+
+
+=== Indexing in PostGres vs mySQL
 
 
 
