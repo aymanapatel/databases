@@ -1,0 +1,20 @@
+{
+   "synchronize": true,
+   "logging": false,
+   "url": "<yoururl-oruseusernamepassword>",
+   "entities": [
+      "src/entity/**/*.ts"
+   ],
+   "type": "postgres",
+   "migrations": [
+      "src/migration/**/*.ts"
+   ],
+   "subscribers": [
+      "src/subscriber/**/*.ts"
+   ],
+   "cli": {
+      "entitiesDir": "src/entity",
+      "migrationsDir": "src/migration",
+      "subscribersDir": "src/subscriber"
+   }
+}
