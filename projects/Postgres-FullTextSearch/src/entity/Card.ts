@@ -14,5 +14,8 @@ export class Card {
   @Column()
   text: string;
 
+  @Column("tsvector", { select: false })
+  document_with_weights: any;
+
 
 }
