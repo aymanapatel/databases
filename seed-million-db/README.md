@@ -20,7 +20,7 @@
 1. Create model `php artisan make:model User` (already done)
 2. Create Seed Command `php artisan make:command Seed`
 
-Result putput should be
+Result output should be
 
 ```
 app/Console
